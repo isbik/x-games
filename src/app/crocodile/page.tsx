@@ -137,18 +137,24 @@ function App() {
 
   const [count, setCount] = useState(0);
 
+  const [prev, setPrev] = useState<string[]>([]);
+
   const getRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * words.length);
 
-    setCurrentWord(words[randomIndex]);
-    setIsWordVisible(false);
+    const newWord = words[randomIndex];
+
+    if (prev.includes(newWord) && prev.length === words.length) {
+      getRandomWord();
+      return;
+    }
+
+    setCurrentWord(newWord);
+    setIsWordVisible(true);
     setIsGameStarted(true);
+    setPrev((prev) => [...prev, newWord]);
 
     setCount((prev) => prev + 1);
-
-    setTimeout(() => {
-      setIsWordVisible(true);
-    }, 200);
   };
 
   return (
@@ -212,32 +218,26 @@ function App() {
                 </motion.button>
               </motion.div>
             ) : (
-              <motion.div
-                key="game"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-              >
+              <>
                 <AnimatePresence mode="wait">
-                  {isWordVisible && (
-                    <motion.div
-                      layout
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="mb-6"
-                    >
-                      <p className="text-lg text-white/90">
-                        Всего слов: {count}
-                      </p>
-                      <p className="text-4xl font-bold text-white">
-                        {currentWord}
-                      </p>
-                    </motion.div>
-                  )}
+                  <motion.div
+                    key={currentWord}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: isWordVisible ? 1 : 0,
+                      height: isWordVisible ? "auto" : 0,
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="mb-6 pointer-events-none"
+                  >
+                    <p className="text-lg text-white/90">Всего слов: {count}</p>
+                    <p className="text-4xl font-bold text-white">
+                      {currentWord}
+                    </p>
+                  </motion.div>
                 </AnimatePresence>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 z-10">
                   <motion.button
                     onClick={() => setIsWordVisible(!isWordVisible)}
                     className="flex-1 bg-white/20 hover:bg-white/30 text-white px-4 py-3 rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
@@ -258,7 +258,7 @@ function App() {
                     Новое слово
                   </motion.button>
                 </div>
-              </motion.div>
+              </>
             )}
           </AnimatePresence>
         </motion.div>
