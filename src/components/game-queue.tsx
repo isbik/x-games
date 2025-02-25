@@ -13,6 +13,7 @@ import {
 import type { Team, GameSettings } from "@/app/alias/page";
 import { cn, shuffle } from "@/lib/utils";
 import { useWordPacks } from "@/shared/hooks/use-word-packs";
+import { useEndTimer } from "@/shared/hooks/use-end-timer";
 
 export function GameQueue({
   currentTeam,
@@ -41,6 +42,8 @@ export function GameQueue({
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
     null
   );
+
+  useEndTimer(timeLeft);
 
   useEffect(() => {
     if (isPlaying && !isPaused && timeLeft > 0) {
