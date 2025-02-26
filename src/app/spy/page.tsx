@@ -216,7 +216,22 @@ const PLAYER_NAMES = [
   "Собака",
   "Корова",
   "Кролик",
-  "Кошка",
+  "Попугай",
+  "Колобок",
+  "Орел",
+  "Сова",
+  "Медведь",
+  "Волк",
+  "Заяц",
+  "Лось",
+  "Кабан",
+  "Олень",
+  "Скунс",
+  "Енот",
+  "Хорек",
+  "Выдра",
+  "Барсук",
+  "Леопард",
 ];
 
 function App() {
@@ -290,8 +305,9 @@ function App() {
                 <Users className="w-8 h-8 text-purple-500" />
                 <div className="flex items-center space-x-4">
                   <button
+                    disabled={playerCount <= 3}
                     onClick={() => setPlayerCount(Math.max(3, playerCount - 1))}
-                    className="bg-purple-100 hover:bg-purple-200 rounded-full p-2"
+                    className="bg-purple-100 hover:bg-purple-200 rounded-full p-2 disabled:opacity-50"
                   >
                     <MinusCircle className="w-6 h-6 text-purple-600" />
                   </button>
@@ -299,8 +315,9 @@ function App() {
                     {playerCount}
                   </span>
                   <button
+                    disabled={playerCount >= PLAYER_NAMES.length}
                     onClick={() => setPlayerCount(playerCount + 1)}
-                    className="bg-purple-100 hover:bg-purple-200 rounded-full p-2"
+                    className="bg-purple-100 hover:bg-purple-200 rounded-full p-2 disabled:opacity-50"
                   >
                     <PlusCircle className="w-6 h-6 text-purple-600" />
                   </button>
@@ -339,8 +356,8 @@ function App() {
                 </span>
               </div>
 
-              <div className="bg-purple-50 p-6 px-12 space-y-4 -mx-8">
-                <div className="flex flex-col items-center space-y-4">
+              <div className="bg-purple-50 p-6 px-6 sm:px-12 space-y-4 -mx-8 max-h-[680px] overflow-auto">
+                <div className="flex flex-col items-center space-y-2">
                   {players.map((player, index) => {
                     const isSpy = index + 1 === gameData?.spyPlayer;
                     const isViewed =
