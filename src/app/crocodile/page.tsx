@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Pencil, RefreshCw, Eye, EyeOff, Play } from "lucide-react";
+import { RefreshCw, Eye, EyeOff, Play } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const words = [
@@ -182,11 +182,17 @@ function App() {
         >
           <h3 className="text-lg font-bold text-white mb-3">Как играть:</h3>
           <ol className="space-y-2 text-white/90 list-decimal list-inside">
-            <li>Нажмите "Начать Игру" для получения слова</li>
-            <li>Нажмите "Показать" чтобы увидеть слово</li>
+            <li>
+              Нажмите {`"`}Начать Игру{`"`} для получения слова
+            </li>
+            <li>
+              Нажмите {`"`}Показать{`"`} чтобы увидеть слово
+            </li>
             <li>Объясните слово жестами, без слов</li>
             <li>Пусть другие игроки попробуют угадать</li>
-            <li>Нажмите "Новое слово" для следующего раунда</li>
+            <li>
+              Нажмите {`"`}Новое слово{`"`} для следующего раунда
+            </li>
           </ol>
         </motion.div>
 

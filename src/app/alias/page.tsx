@@ -22,10 +22,10 @@ export type GameSettings = {
   selectedPacks: string[];
 };
 
+type Step = "setup" | "packs" | "settings" | "queue" | "review" | "score";
+
 export default function Game() {
-  const [step, setStep] = useState<
-    "setup" | "packs" | "settings" | "queue" | "review" | "score"
-  >("setup");
+  const [step, setStep] = useState<Step>("setup");
 
   const [teams, setTeams] = useState<Team[]>([]);
   const [settings, setSettings] = useState<GameSettings>({
@@ -47,7 +47,7 @@ export default function Game() {
       review: "score",
       score: "queue",
     };
-    setStep(steps[step] as any);
+    setStep(steps[step] as unknown as Step);
   };
 
   const handleTeamsSubmit = (newTeams: Team[]) => {
