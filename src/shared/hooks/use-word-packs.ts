@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 
 export const useWordPacks = () => {
-  const [wordPacks, setWordPacks] = useState([]);
+  const [wordPacks, setWordPacks] = useState<
+    Array<{ name: string; words: string[] }>
+  >([]);
   useEffect(() => {
     fetch("/assets/words.json", {
       headers: {

@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 export const useEndTimer = (count: number) => {
-  const audio = new Audio("/assets/end-timer.wav");
+  const audioRef = useRef<null | HTMLAudioElement>(null);
 
   useEffect(() => {
+    if (audioRef.current === null) {
+      audioRef.current = new window.Audio("/assets/end-timer.wav");
+    }
+
     if (Math.floor(count) === 3) {
-      audio.play();
+      audioRef.current?.play();
     }
   }, [count]);
 };
