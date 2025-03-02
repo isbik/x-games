@@ -47,7 +47,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 px-4 pt-4 flex flex-col justify-end">
+    <div className="min-h-svh bg-gradient-to-b from-purple-100 to-pink-100 px-4 pt-4 flex flex-col justify-end">
       <div className="max-w-md w-full mx-auto bg-white rounded-t-2xl shadow-xl p-6 space-y-6">
         <div className="flex items-center justify-center space-x-2">
           <Brain className="w-8 h-8 text-purple-500" />

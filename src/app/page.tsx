@@ -45,7 +45,7 @@ const games = [
 
 export default function Games() {
   return (
-    <div className="flex items-center justify-center p-6 bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-300 min-h-screen">
+    <div className="flex items-center justify-center p-6 bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-300 min-h-svh">
       <div className="flex flex-col space-y-6 max-w-lg w-full">
         {games.map((game) => (
           <Link key={game.id} href={game.url} className="group">

@@ -57,7 +57,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-tr from-yellow-500 via-pink-500 to-blue-500 flex flex-col items-center justify-end">
+    <div className="min-h-svh overflow-hidden bg-gradient-to-tr from-yellow-500 via-pink-500 to-blue-500 flex flex-col items-center justify-end">
       <div className="max-w-md w-full mx-auto bg-white rounded-t-xl overflow-hidden shadow-2xl shadow-slate-950">
         <div className="p-6">
           <h1 className="text-3xl font-bold text-center text-purple-600">

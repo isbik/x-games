@@ -135,8 +135,6 @@ function App() {
   const [isWordVisible, setIsWordVisible] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
 
-  const [count, setCount] = useState(0);
-
   const [prev, setPrev] = useState<string[]>([]);
 
   const getRandomWord = () => {
@@ -153,15 +151,13 @@ function App() {
     setIsWordVisible(true);
     setIsGameStarted(true);
     setPrev((prev) => [...prev, newWord]);
-
-    setCount((prev) => prev + 1);
   };
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 px-4 sm:px-8 pt-4 sm:pt-8"
+      className="min-h-svh flex flex-col bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 px-4 sm:px-8 pt-4 sm:pt-8"
     >
       <div className="max-w-lg w-full mx-auto flex flex-col gap-2 grow">
         <motion.div
@@ -225,6 +221,20 @@ function App() {
               </motion.div>
             ) : (
               <>
+                <div
+                  className="max-h-48 overflow-auto"
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.scrollTop = ref.scrollHeight;
+                    }
+                  }}
+                >
+                  {prev.map((word) => (
+                    <p key={word} className="text-sm text-white">
+                      {word}
+                    </p>
+                  ))}
+                </div>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentWord}
@@ -236,7 +246,6 @@ function App() {
                     exit={{ opacity: 0 }}
                     className="mb-6 pointer-events-none"
                   >
-                    <p className="text-lg text-white/90">Всего слов: {count}</p>
                     <p className="text-4xl font-bold text-white">
                       {currentWord}
                     </p>

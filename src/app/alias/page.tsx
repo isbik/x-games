@@ -91,7 +91,7 @@ export default function Game() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b flex flex-col grow">
+    <div className="min-h-svh bg-gradient-to-b flex flex-col grow">
       <div className="mx-auto px-0 flex flex-col grow w-full overflow-hidden">
         {step === "setup" && <TeamSetup onSubmit={handleTeamsSubmit} />}
         {step === "packs" && <WordPacks onSubmit={handlePacksSelect} />}

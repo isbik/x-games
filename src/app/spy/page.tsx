@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Users,
   Timer,
@@ -291,8 +291,35 @@ function App() {
     setIsTimerRunning(true);
   };
 
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleShowRole = (player: string) => {
+    const isViewed = showedRoles.includes(player);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    if (showPlayerRole === player) {
+      setShowPlayerRole(null);
+      return;
+    }
+
+    if (isViewed) return;
+
+    setShowPlayerRole(player);
+
+    setShowedRoles((prev) => {
+      return [...prev, player];
+    });
+
+    timerRef.current = setTimeout(() => {
+      setShowPlayerRole(null);
+    }, 1000);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-purple-100 px-6 pt-6 flex flex-col justify-end">
+    <div className="min-h-svh bg-gradient-to-b from-blue-100 to-purple-100 px-6 pt-6 flex flex-col justify-end">
       <div className="max-w-2xl mx-auto w-full">
         <div className="bg-white rounded-t-2xl shadow-xl p-8">
           <h1 className="text-4xl font-bold text-center mb-8 text-purple-600">
@@ -367,18 +394,7 @@ function App() {
                       <React.Fragment key={player}>
                         <button
                           onClick={() => {
-                            if (showPlayerRole === player) {
-                              setShowPlayerRole(null);
-                              return;
-                            }
-
-                            if (isViewed) return;
-
-                            setShowPlayerRole(player);
-
-                            setShowedRoles((prev) => {
-                              return [...prev, player];
-                            });
+                            handleShowRole(player);
                           }}
                           className={cn(
                             "border-purple-600 bg-white border-2 hover:bg-purple-50 text-purple-600 font-bold py-3 px-6 rounded-xl w-full flex items-center space-x-2",
