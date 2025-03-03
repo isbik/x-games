@@ -31,7 +31,7 @@ export function TeamScore({
       <div className="bg-black/20 h-[1px]"></div>
 
       <div className="space-y-2 p-4 bg-gray-50">
-        {sortedTeams.map((team) => (
+        {teams.map((team) => (
           <div
             key={team.id}
             className={`flex items-center justify-between rounded-lg border p-4 bg-white ${

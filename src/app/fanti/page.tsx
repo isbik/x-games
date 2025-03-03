@@ -57,8 +57,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-svh overflow-hidden bg-gradient-to-tr from-yellow-500 via-pink-500 to-blue-500 flex flex-col items-center justify-end">
-      <div className="max-w-md w-full mx-auto bg-white rounded-t-xl overflow-hidden shadow-2xl shadow-slate-950">
+    <div className="min-h-svh overflow-hidden bg-gradient-to-tr from-yellow-500 via-pink-500 to-blue-500 flex flex-col items-center p-4">
+      <div className="max-w-md w-full mx-auto bg-white rounded-2xl overflow-hidden shadow-2xl shadow-slate-950">
         <div className="p-6">
           <h1 className="text-3xl font-bold text-center text-purple-600">
             Фанты
@@ -67,6 +67,35 @@ function App() {
           {!gameStarted ? (
             <>
               <div className="mb-4 flex flex-col gap-2">
+                <div className="flex items-center mt-2 ml-1">
+                  <input
+                    id="showTasks"
+                    type="checkbox"
+                    checked={showTasks}
+                    onChange={(e) => setShowTasks(e.target.checked)}
+                    className="mr-2 accent-purple-500"
+                    disabled={tasks.length !== 0}
+                  />
+                  <label htmlFor="showTasks">Показывать задания</label>
+                </div>
+
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    value={newTask}
+                    onChange={(e) => setNewTask(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && addTask()}
+                    placeholder="Введите задание..."
+                    className="flex-1 p-3 px-4 border focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                  <Button
+                    onClick={addTask}
+                    className="bg-purple-500 size-12 text-white p-2 hover:bg-purple-600 transition-colors shrink-0"
+                  >
+                    <FaPlus />
+                  </Button>
+                </div>
+
                 <div className="space-y-2 mb-4">
                   {tasks.map((task) => (
                     <motion.div
@@ -76,7 +105,7 @@ function App() {
                       exit={{ opacity: 0, y: 10 }}
                       className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
                     >
-                      <span>
+                      <span className="truncate">
                         {showTasks ? task.text : "*".repeat(task.text.length)}
                       </span>
                       <button
@@ -97,36 +126,6 @@ function App() {
                     Начать игру
                   </button>
                 )}
-
-                <div className="flex items-center mt-2 ml-1">
-                  <input
-                    id="showTasks"
-                    type="checkbox"
-                    checked={showTasks}
-                    onChange={(e) => setShowTasks(e.target.checked)}
-                    className="mr-2 accent-purple-500"
-                    disabled={tasks.length !== 0}
-                  />
-                  <label htmlFor="showTasks">Показать задания</label>
-                </div>
-
-                <div className="flex gap-2">
-                  <Input
-                    type="text"
-                    value={newTask}
-                    onChange={(e) => setNewTask(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && addTask()}
-                    placeholder="Введите задание..."
-                    className="flex-1 p-2 border focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  />
-                  <Button
-                    onClick={addTask}
-                    className="bg-purple-500 text-white p-2 hover:bg-purple-600 transition-colors shrink-0"
-                    size={"icon"}
-                  >
-                    <FaPlus />
-                  </Button>
-                </div>
               </div>
             </>
           ) : (
@@ -143,7 +142,7 @@ function App() {
                     <h2 className="text-xl font-semibold mb-2">
                       Ваше задание:
                     </h2>
-                    <p className="text-2xl text-purple-600">
+                    <p className="text-2xl text-purple-600 break-all">
                       {currentTask.text}
                     </p>
                   </motion.div>

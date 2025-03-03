@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import type { GameSettings } from "@/app/alias/page";
+import { Switch } from "./ui/switch";
+import { useSessionStorage } from "@/shared/hooks/use-session-storage";
 
 export function GameSettings({
   onSubmit,
@@ -16,10 +18,14 @@ export function GameSettings({
 }) {
   const [playTime, setPlayTime] = useState(60);
   const [scoreToWin, setScoreToWin] = useState(25);
+  const [subtractPoints, setSubtractPoints] = useSessionStorage(
+    "subtractPoints",
+    false
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ playTime, scoreToWin });
+    onSubmit({ playTime, scoreToWin, subtractPoints });
   };
 
   return (
@@ -65,6 +71,14 @@ export function GameSettings({
               </button>
             ))}
           </div>
+        </div>
+        <div className="flex items-center space-x-2 justify-between">
+          <Label htmlFor="subtractPoints">Отнимать очки за ошибки</Label>
+          <Switch
+            id="subtractPoints"
+            checked={subtractPoints}
+            onCheckedChange={setSubtractPoints}
+          />
         </div>
       </div>
 

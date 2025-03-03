@@ -319,10 +319,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-svh bg-gradient-to-b from-blue-100 to-purple-100 px-6 pt-6 flex flex-col justify-end">
+    <div className="min-h-dvh bg-gradient-to-b from-blue-100 to-purple-100 px-2 sm:px-6 pt-6 flex flex-col justify-end">
       <div className="max-w-2xl mx-auto w-full">
-        <div className="bg-white rounded-t-2xl shadow-xl p-8">
-          <h1 className="text-4xl font-bold text-center mb-8 text-purple-600">
+        <div className="bg-white rounded-t-2xl shadow-xl p-4 sm:p-8">
+          <h1 className="text-4xl font-bold text-center mb-8 mt-4 text-purple-600">
             Шпион
           </h1>
 
@@ -383,7 +383,7 @@ function App() {
                 </span>
               </div>
 
-              <div className="bg-purple-50 p-6 px-6 sm:px-12 space-y-4 -mx-8 max-h-[680px] overflow-auto">
+              <div className="bg-purple-50 p-4 px-4 sm:px-12 space-y-4 -mx-4 max-h-[680px] overflow-auto">
                 <div className="flex flex-col items-center space-y-2">
                   {players.map((player, index) => {
                     const isSpy = index + 1 === gameData?.spyPlayer;

@@ -20,6 +20,7 @@ export type GameSettings = {
   playTime: number;
   scoreToWin: number;
   selectedPacks: string[];
+  subtractPoints: boolean;
 };
 
 type Step = "setup" | "packs" | "settings" | "queue" | "review" | "score";
@@ -32,6 +33,8 @@ export default function Game() {
     playTime: 60,
     scoreToWin: 30,
     selectedPacks: [],
+    // отнимать очки за пропуск
+    subtractPoints: false,
   });
   const [currentTeamIndex, setCurrentTeamIndex] = useState(0);
   const [roundWords, setRoundWords] = useState<
@@ -78,7 +81,7 @@ export default function Game() {
     setTeams((prev) =>
       prev.map((team, idx) =>
         idx === currentTeamIndex
-          ? { ...team, score: team.score + points }
+          ? { ...team, score: Math.max(team.score + points, 0) }
           : team
       )
     );
@@ -108,7 +111,11 @@ export default function Game() {
         )}
 
         {step === "review" && (
-          <RoundReview words={roundWords} onComplete={handleReviewComplete} />
+          <RoundReview
+            settings={settings}
+            words={roundWords}
+            onComplete={handleReviewComplete}
+          />
         )}
 
         {step === "score" && (

@@ -48,19 +48,19 @@ export function WordPacks({
           <button
             key={pack.name}
             type="button"
-            className={`relative flex flex-col items-center rounded-lg border p-4 bg-white transition-colors hover:bg-muted ${
+            className={`min-h-28 flex items-center justify-center relative flex-col rounded-lg border p-4 transition-colors hover:bg-muted ${
               selectedPacks.includes(pack.name)
-                ? "border-primary bg-purple-500/5"
+                ? "border-primary bg-purple-500/10"
                 : "border-border"
             }`}
             onClick={() => togglePack(pack.name)}
           >
             {selectedPacks.includes(pack.name) && (
               <div className="absolute right-2 top-2">
-                <CheckIcon className="h-4 w-4 text-primary" />
+                <CheckIcon className="size-6 text-primary" />
               </div>
             )}
-            <h3 className="mt-2 font-medium">{pack.name}</h3>
+            <h3 className="mt-2 font-medium text-lg">{pack.name}</h3>
             <p className="text-sm text-muted-foreground">
               {pack.words.length} слов
             </p>
@@ -70,7 +70,7 @@ export function WordPacks({
 
       <div className="bg-black/20 h-[1px] mb-4"></div>
 
-      <div className="mx-4">
+      <div className="mx-4 mb-4">
         <Button
           type="submit"
           className="w-full"

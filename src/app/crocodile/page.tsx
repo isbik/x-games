@@ -157,7 +157,7 @@ function App() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-svh flex flex-col bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 px-4 sm:px-8 pt-4 sm:pt-8"
+      className="min-h-dvh flex flex-col bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 px-4 sm:px-8 pt-4 sm:pt-8"
     >
       <div className="max-w-lg w-full mx-auto flex flex-col gap-2 grow">
         <motion.div
@@ -229,7 +229,7 @@ function App() {
                     }
                   }}
                 >
-                  {prev.map((word) => (
+                  {prev.slice(0, -1).map((word) => (
                     <p key={word} className="text-sm text-white">
                       {word}
                     </p>

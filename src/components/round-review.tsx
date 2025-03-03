@@ -3,13 +3,17 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckIcon, XIcon } from "lucide-react";
+import { CardHeader, CardTitle } from "@/components/ui/card";
+import { GameSettings } from "@/app/alias/page";
+import { Switch } from "./ui/switch";
+import { cn } from "@/lib/utils";
 
 export function RoundReview({
   words,
+  settings,
   onComplete,
 }: {
+  settings: GameSettings;
   words: Array<{ word: string; correct: boolean }>;
   onComplete: (points: number) => void;
 }) {
@@ -24,48 +28,52 @@ export function RoundReview({
   };
 
   const handleComplete = () => {
-    const points = reviewedWords.filter((word) => word.correct).length;
+    const points = reviewedWords.reduce((acc, word) => {
+      if (!settings.subtractPoints) return acc + (word.correct ? 1 : 0);
+      return acc + (word.correct ? 1 : -1);
+    }, 0);
+
     onComplete(points);
   };
 
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Проверка очков</CardTitle>
+      <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
+        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+          Проверка очков
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div className="grid gap-2">
-            {reviewedWords.map((word, index) => (
-              <button
-                key={index}
-                onClick={() => toggleWord(index)}
-                className={`flex items-center justify-between rounded-lg border p-4 transition-colors ${
-                  word.correct
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:bg-muted"
-                }`}
-              >
-                <span className="text-lg">{word.word}</span>
-                {word.correct ? (
-                  <CheckIcon className="h-5 w-5 text-primary" />
-                ) : (
-                  <XIcon className="h-5 w-5 text-muted-foreground" />
-                )}
-              </button>
-            ))}
-          </div>
-          <div className="flex justify-between pt-4">
-            <div className="text-lg">
-              Всего очков:{" "}
-              <span className="font-bold">
-                {reviewedWords.filter((w) => w.correct).length}
-              </span>
+
+      <div className="space-y-4 bg-gray-50 p-4 border-b">
+        <div className="grid gap-2 ">
+          {reviewedWords.map((word, index) => (
+            <div
+              key={index}
+              className={cn(
+                "flex items-center justify-between rounded-lg border p-4 transition-colors bg-white",
+                {
+                  "border-blue-500": word.correct,
+                  "border-red-500": !word.correct,
+                }
+              )}
+              onClick={() => toggleWord(index)}
+            >
+              <span className="text-lg">{word.word}</span>
+              <Switch checked={word.correct} />
             </div>
-            <Button onClick={handleComplete}>Завершить</Button>
-          </div>
+          ))}
         </div>
-      </CardContent>
+      </div>
+
+      <div className="flex justify-between p-4">
+        <div className="text-lg">
+          Всего очков:{" "}
+          <span className="font-bold">
+            {reviewedWords.filter((w) => w.correct).length}
+          </span>
+        </div>
+        <Button onClick={handleComplete}>Завершить</Button>
+      </div>
     </>
   );
 }

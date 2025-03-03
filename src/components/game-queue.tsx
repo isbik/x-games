@@ -42,6 +42,7 @@ export function GameQueue({
   const [swipeDirection, setSwipeDirection] = useState<"left" | "right" | null>(
     null
   );
+  const [usedWords, setUsedWords] = useState<Set<string>>(new Set()); // Track used words
 
   useEndTimer(timeLeft);
 
@@ -58,6 +59,7 @@ export function GameQueue({
     setTimeLeft(settings.playTime);
     setCurrentWordIndex(0);
     setCurrentWords([{ word: words[0], correct: false }]);
+    setUsedWords(new Set([words[0]])); // Initialize with the first word
   };
 
   const togglePause = () => setIsPaused(!isPaused);
@@ -65,23 +67,41 @@ export function GameQueue({
   const handleWordResult = (correct: boolean) => {
     setSwipeDirection(correct ? "right" : "left");
 
+    setCurrentWords((prev) => {
+      const newArray = [...prev];
+      newArray[currentWordIndex].correct = correct;
+      return newArray;
+    });
+
     setTimeout(() => {
-      setCurrentWords((prev) => {
-        const newArray = [...prev];
-        newArray[currentWordIndex].correct = correct;
-        return newArray;
-      });
+      let nextWordIndex = currentWordIndex + 1;
+
+      // Find the next word that hasn't been used yet
+      while (
+        nextWordIndex < words.length &&
+        usedWords.has(words[nextWordIndex])
+      ) {
+        nextWordIndex++;
+      }
+
+      if (nextWordIndex >= words.length) {
+        // No more unique words left
+        setIsPlaying(false);
+        onStart(currentWords);
+        return;
+      }
+
+      const nextWord = words[nextWordIndex];
+      setCurrentWordIndex(nextWordIndex);
+      setCurrentWords((prev) => [...prev, { word: nextWord, correct: false }]);
+      setUsedWords((prev) => new Set(prev).add(nextWord)); // Add the new word to usedWords
+      setSwipeDirection(null);
 
       if (timeLeft === 0) {
         setIsPlaying(false);
         onStart(currentWords);
         return;
       }
-
-      const nextWord = words[(currentWordIndex + 1) % words.length];
-      setCurrentWordIndex((prev) => prev + 1);
-      setCurrentWords((prev) => [...prev, { word: nextWord, correct: false }]);
-      setSwipeDirection(null);
     }, 500);
   };
 
@@ -144,7 +164,7 @@ export function GameQueue({
               : "transparent",
           }}
           transition={{ duration: 0.5 }}
-          className="m-4 relative max-h-[250px] max-w-[600px] grow flex flex-col items-center justify-center p-8 rounded-xl bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-2 border-primary/20 self-center justify-self-end my-auto"
+          className="m-4 relative self-stretch grow flex flex-col items-center justify-center p-8 rounded-xl bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-2 border-primary/20 mx-4"
         >
           <div className="text-5xl font-bold text-center mb-8">
             {currentWords[currentWordIndex]?.word}
