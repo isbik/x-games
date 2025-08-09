@@ -41,23 +41,33 @@ const games = [
     icon: "🐊",
     url: "/crocodile",
   },
+  {
+    id: "6",
+    name: "Слова на скорость",
+    description:
+      "Собирай как можно больше карт, правильно и быстро называя слова по теме и букве!",
+    icon: "⚡",
+    url: "/words-rush",
+  },
 ];
 
 export default function Games() {
   return (
     <div className="flex items-center justify-center p-6 bg-gradient-to-br from-yellow-300 via-pink-300 to-purple-300 min-h-svh">
-      <div className="flex flex-col space-y-6 max-w-lg w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full">
         {games.map((game) => (
           <Link key={game.id} href={game.url} className="group">
-            <Card className="transition-transform transform group-hover:scale-105 shadow-lg rounded-2xl bg-white border-4 border-cyan-400">
-              <CardHeader className="flex items-center space-x-3">
-                <span className="text-3xl">{game.icon}</span>
-                <CardTitle className="text-xl font-bold text-gray-800">
+            <Card className="transition-all duration-300 h-full rounded-2xl bg-white border-4 border-blue-400 flex flex-col group hover:shadow-2xl">
+              <CardHeader className="flex items-center space-x-3 pb-3">
+                <span className="text-4xl transition-all duration-300 group-hover:scale-150 group-hover:-translate-y-2 group-hover:text-blue-600">
+                  {game.icon}
+                </span>
+                <CardTitle className="text-xl font-bold text-gray-800 text-center transition-all duration-300 group-hover:text-blue-700">
                   {game.name}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 font-medium">
+              <CardContent className="flex-grow">
+                <p className="text-sm text-gray-600 font-medium text-center transition-all duration-300 group-hover:text-gray-800 group-hover:font-semibold">
                   {game.description}
                 </p>
               </CardContent>

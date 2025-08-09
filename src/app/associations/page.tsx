@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
 import { Brain } from "lucide-react";
+import React, { useState } from "react";
 
 interface WordEntry {
   word: string;
@@ -92,11 +92,18 @@ function App() {
         )}
 
         {firstPlayerMode && words.length === 0 && (
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-blue-600 text-sm">
-              Первый игрок придумает ассоциацию и слово
-            </p>
-          </div>
+          <ol className="text-blue-600 text-sm bg-blue-50 p-4 rounded-lg">
+            <li>
+              Первый игрок мысленно выбирает любое слово
+              (например:&quot;звезда&quot;).
+            </li>
+            <li>
+              Придумывает ассоциацию к этому слову (например: &quot;ночь&quot;).
+            </li>
+            <li>
+              Пишет только ассоциацию и отправляет слово следующему игроку.
+            </li>
+          </ol>
         )}
 
         {words.length > 0 && (
@@ -111,7 +118,7 @@ function App() {
               }}
             >
               {words.map((entry, index) => {
-                const isHidden = index === 0;
+                const isHidden = words.length < 2;
 
                 return (
                   <div

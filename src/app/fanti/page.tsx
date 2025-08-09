@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaPlus, FaRandom, FaTrash, FaRedo } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { FaPlus, FaRandom, FaRedo, FaTrash } from "react-icons/fa";
 
 interface Task {
   id: number;
@@ -60,25 +61,13 @@ function App() {
     <div className="min-h-svh overflow-hidden bg-gradient-to-tr from-yellow-500 via-pink-500 to-blue-500 flex flex-col items-center p-4">
       <div className="max-w-md w-full mx-auto bg-white rounded-2xl overflow-hidden shadow-2xl shadow-slate-950">
         <div className="p-6">
-          <h1 className="text-3xl font-bold text-center text-purple-600">
+          <h1 className="text-3xl font-bold text-center text-purple-600 mb-4">
             Фанты
           </h1>
 
           {!gameStarted ? (
             <>
               <div className="mb-4 flex flex-col gap-2">
-                <div className="flex items-center mt-2 ml-1">
-                  <input
-                    id="showTasks"
-                    type="checkbox"
-                    checked={showTasks}
-                    onChange={(e) => setShowTasks(e.target.checked)}
-                    className="mr-2 accent-purple-500"
-                    disabled={tasks.length !== 0}
-                  />
-                  <label htmlFor="showTasks">Показывать задания</label>
-                </div>
-
                 <div className="flex gap-2">
                   <Input
                     type="text"
@@ -95,6 +84,16 @@ function App() {
                     <FaPlus />
                   </Button>
                 </div>
+
+                <label className="flex items-center my-2">
+                  <Switch
+                    checked={showTasks}
+                    onCheckedChange={(value) => setShowTasks(value)}
+                    className="mr-2 accent-purple-500"
+                    disabled={tasks.length !== 0}
+                  />
+                  <p>Показывать задания</p>
+                </label>
 
                 <div className="space-y-2 mb-4">
                   {tasks.map((task) => (
