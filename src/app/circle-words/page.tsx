@@ -68,10 +68,8 @@ export default function WordFlashGame() {
       setHighlightedLetters([]);
 
       const newLetter = getRandomLetter();
-      const newTheme = getRandomTheme();
 
       setCurrentLetter(highlightedLetters[0] || newLetter);
-      setTheme(newTheme);
       setTimeLeft(timerDuration);
       setUsedLetters((prev) => [...prev, newLetter]);
       setIsSpinning(false);
@@ -114,6 +112,7 @@ export default function WordFlashGame() {
     setUsedLetters([]);
     setSpinRotation(0);
     startRound();
+    setTheme(getRandomTheme())
   };
 
   const renderLetterWheel = () => {
