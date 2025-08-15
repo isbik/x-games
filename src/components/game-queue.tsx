@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import type { GameSettings, Team } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
+import { cn, shuffle } from "@/lib/utils";
+import { useEndTimer } from "@/shared/hooks/use-end-timer";
+import { useWordPacks } from "@/shared/hooks/use-word-packs";
+import { motion } from "framer-motion";
 import {
-  PlayIcon,
-  PauseIcon,
   CheckCircle2Icon,
+  PauseIcon,
+  PlayIcon,
   XCircleIcon,
 } from "lucide-react";
-import type { Team, GameSettings } from "@/app/alias/page";
-import { cn, shuffle } from "@/lib/utils";
-import { useWordPacks } from "@/shared/hooks/use-word-packs";
-import { useEndTimer } from "@/shared/hooks/use-end-timer";
+import { useEffect, useState } from "react";
 
 export function GameQueue({
   currentTeam,
@@ -164,7 +164,7 @@ export function GameQueue({
               : "transparent",
           }}
           transition={{ duration: 0.5 }}
-          className="m-4 relative self-stretch grow flex flex-col items-center justify-center p-8 rounded-xl bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 border-2 border-primary/20 mx-4"
+          className="m-4 relative self-stretch grow flex flex-col items-center justify-center p-8"
         >
           <div className="text-5xl font-bold text-center mb-8">
             {currentWords[currentWordIndex]?.word}
@@ -191,7 +191,7 @@ export function GameQueue({
         </motion.div>
       ) : (
         <Button
-          className="m-4 mt-auto text-xl h-16 bg-gradient-to-r from-primary via-secondary to-primary"
+          className="m-4 mb-0 text-xl h-16 bg-gradient-to-r from-primary via-secondary to-primary"
           onClick={startGame}
         >
           <PlayIcon className="h-6 w-6" /> Начать раунд

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { RefreshCw, Eye, EyeOff, Play } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Eye, EyeOff, Play, RefreshCw } from "lucide-react";
+import { useState } from "react";
 
 const words = [
   "Без труда не поймать рыбку из пруда",
@@ -157,25 +157,20 @@ function App() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-dvh flex flex-col bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 px-4 sm:px-8 pt-4 sm:pt-8"
+      className="min-h-dvh flex flex-col px-4 sm:px-8 pt-4 sm:pt-8"
     >
       <div className="max-w-lg w-full mx-auto flex flex-col gap-2 grow">
         <motion.div
-          className="text-center mb-2"
-          initial={{ y: -20 }}
-          animate={{ y: 0 }}
-        >
-          <h1 className="text-4xl font-bold text-white mb-2">Крокодил 🐊</h1>
-          <p className="text-lg text-white/90">
-            Покажи слово, пусть другие угадают!
-          </p>
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-black/50 backdrop-blur-lg rounded-2xl p-5 border border-white/20"
+          className="bg-green-700 rounded-2xl p-5 border"
         >
+          <h1 className="text-4xl font-bold mb-2 text-white text-center">
+            Крокодил 🐊
+          </h1>
+          <p className="text-lg text-center text-white/90 mb-4">
+            Покажи слово, пусть другие угадают!
+          </p>
           <h3 className="text-lg font-bold text-white mb-3">Как играть:</h3>
           <ol className="space-y-2 text-white/90 list-decimal list-inside">
             <li>
@@ -199,7 +194,7 @@ function App() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="bg-black/50 backdrop-blur-lg rounded-t-3xl p-6 border border-white/20"
+          className="bg-green-700 rounded-t-3xl p-6"
         >
           <AnimatePresence mode="wait">
             {!isGameStarted ? (

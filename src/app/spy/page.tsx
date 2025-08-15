@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Users,
-  Timer,
-  Vote,
-  Shuffle,
-  PlayCircle,
-  PlusCircle,
-  MinusCircle,
-  Eye,
-} from "lucide-react";
 import { cn, shuffle } from "@/lib/utils";
 import { useEndTimer } from "@/shared/hooks/use-end-timer";
+import {
+  Eye,
+  MinusCircle,
+  PlayCircle,
+  PlusCircle,
+  Shuffle,
+  Timer,
+  Users,
+  Vote,
+} from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 
 const LOCATIONS = [
   "Аэропорт",
@@ -319,7 +319,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-blue-100 to-purple-100 px-2 sm:px-6 pt-6 flex flex-col justify-end">
+    <div className="min-h-dvh px-2 sm:px-6 pt-6 flex flex-col justify-end">
       <div className="max-w-2xl mx-auto w-full">
         <div className="bg-white rounded-t-2xl shadow-xl p-4 sm:p-8">
           <h1 className="text-4xl font-bold text-center mb-8 mt-4 text-purple-600">

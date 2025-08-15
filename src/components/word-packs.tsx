@@ -6,8 +6,8 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckIcon } from "lucide-react";
 import { useWordPacks } from "@/shared/hooks/use-word-packs";
+import { CheckIcon } from "lucide-react";
 
 export function WordPacks({
   onSubmit,
@@ -70,7 +70,7 @@ export function WordPacks({
 
       <div className="bg-black/20 h-[1px] mb-4"></div>
 
-      <div className="mx-4 mb-4">
+      <div className="mx-4">
         <Button
           type="submit"
           className="w-full"

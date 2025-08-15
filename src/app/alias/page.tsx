@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { TeamSetup } from "@/components/team-setup";
-import { WordPacks } from "@/components/word-packs";
-import { GameSettings } from "@/components/game-settings";
 import { GameQueue } from "@/components/game-queue";
+import { GameSettings } from "@/components/game-settings";
 import { RoundReview } from "@/components/round-review";
 import { TeamScore } from "@/components/team-score";
+import { TeamSetup } from "@/components/team-setup";
+import { WordPacks } from "@/components/word-packs";
+import { useState } from "react";
 
 export type Team = {
   id: string;
@@ -94,8 +94,8 @@ export default function Game() {
   };
 
   return (
-    <div className="min-h-svh bg-gradient-to-b flex flex-col grow">
-      <div className="mx-auto px-0 flex flex-col grow w-full overflow-hidden">
+    <div className="min-h-svh flex flex-col grow py-4">
+      <div className="mx-auto h-fit p-0 pb-4 flex flex-col w-full overflow-hidden max-w-xl bg-white rounded-2xl shadow-2xl shadow-slate-950">
         {step === "setup" && <TeamSetup onSubmit={handleTeamsSubmit} />}
         {step === "packs" && <WordPacks onSubmit={handlePacksSelect} />}
         {step === "settings" && (

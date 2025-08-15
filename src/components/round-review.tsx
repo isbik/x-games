@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 
+import { GameSettings } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import { GameSettings } from "@/app/alias/page";
-import { Switch } from "./ui/switch";
 import { cn } from "@/lib/utils";
+import { Switch } from "./ui/switch";
 
 export function RoundReview({
   words,
@@ -65,7 +65,7 @@ export function RoundReview({
         </div>
       </div>
 
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between p-4 pb-0">
         <div className="text-lg">
           Всего очков:{" "}
           <span className="font-bold">

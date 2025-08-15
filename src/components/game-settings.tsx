@@ -4,12 +4,12 @@ import type React from "react";
 
 import { useState } from "react";
 
+import type { GameSettings } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import type { GameSettings } from "@/app/alias/page";
-import { Switch } from "./ui/switch";
 import { useSessionStorage } from "@/shared/hooks/use-session-storage";
+import { Switch } from "./ui/switch";
 
 export function GameSettings({
   onSubmit,
@@ -72,7 +72,7 @@ export function GameSettings({
             ))}
           </div>
         </div>
-        <div className="flex items-center space-x-2 justify-between">
+        <div className="flex items-center space-x-2">
           <Label htmlFor="subtractPoints">Отнимать очки за ошибки</Label>
           <Switch
             id="subtractPoints"

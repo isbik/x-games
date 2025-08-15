@@ -9,7 +9,6 @@ export interface Player {
   id: string;
   name: string;
   color: string;
-  icon: string;
   score: number;
 }
 
@@ -20,7 +19,6 @@ export interface GameData {
 
 // icons.ts
 export const playerIcons = [
-  "👤",
   "🐱",
   "🦊",
   "🐼",
@@ -123,6 +121,7 @@ export const playerIcons = [
   "🐀",
   "🐿",
   "🦔",
+  "👤",
 ];
 
 // colors.ts
@@ -158,7 +157,6 @@ const App: React.FC = () => {
         id: playerId,
         name: `Игрок ${i + 1}`,
         color: playerColors[Math.floor(Math.random() * playerColors.length)],
-        icon: playerIcons[Math.floor(Math.random() * playerIcons.length)],
         score: 0,
       });
     }
@@ -171,8 +169,14 @@ const App: React.FC = () => {
 
   const startRound = () => {
     const target = isAdult ? adultCategories : categories;
-    const randomCategory = target[Math.floor(Math.random() * target.length)];
-    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+    const randomCategory = target.filter((c) => c !== currentRound?.category)[
+      Math.floor(Math.random() * target.length)
+    ];
+
+    const randomLetter = letters.filter(
+      (letter) => letter !== currentRound?.letter
+    )[Math.floor(Math.random() * letters.length)];
+
     setCurrentRound({ category: randomCategory, letter: randomLetter });
     setWinners([]);
     setGameState("round");
@@ -205,7 +209,7 @@ const App: React.FC = () => {
 
   if (gameState === "setup") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
+      <div className="min-h-screen p-4">
         <div className="max-w-md mx-auto">
           <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
             👤 Введите имена игроков
@@ -216,7 +220,7 @@ const App: React.FC = () => {
               {players.map((player, index) => (
                 <div key={player.id} className="flex items-center space-x-3">
                   <div className={cn("text-2xl rounded-full", player.color)}>
-                    {player.icon}
+                    {playerIcons[index]}
                   </div>
                   <div className="flex-1">
                     <input
@@ -259,6 +263,7 @@ const App: React.FC = () => {
             </label>
 
             <button
+              disabled={players.length >= 16}
               onClick={() => {
                 const newPlayerId = `player-${players.length}`;
                 const newPlayer: Player = {
@@ -268,14 +273,11 @@ const App: React.FC = () => {
                     playerColors[
                       Math.floor(Math.random() * playerColors.length)
                     ],
-                  icon: playerIcons[
-                    Math.floor(Math.random() * playerIcons.length)
-                  ],
                   score: 0,
                 };
                 setPlayers((prev) => [...prev, newPlayer]);
               }}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all mb-4"
+              className="w-full disabled:opacity-50 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all mb-4"
             >
               Добавить игрока
             </button>
@@ -311,12 +313,12 @@ const App: React.FC = () => {
 
   if (gameState === "round" && currentRound) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 p-4">
+      <div className="min-h-screen p-4">
         <div className="max-w-md mx-auto">
           <Header />
           <div className="bg-white rounded-2xl shadow-lg p-4 mb-6">
             <div className="space-y-3 mb-6">
-              {players.map((player) => (
+              {players.map((player, index) => (
                 <button
                   key={player.id}
                   onClick={() => toggleWinner(player.id)}
@@ -328,7 +330,7 @@ const App: React.FC = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{player.icon}</span>
+                      <span className="text-2xl"> {playerIcons[index]}</span>
                       <span
                         className={`font-medium ${
                           winners.includes(player.id)
@@ -386,28 +388,26 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
+    <div className="min-h-screen p-4">
       <div className="max-w-md mx-auto">
         <Header />
 
         <div className="bg-white rounded-2xl shadow-lg p-4 mb-6">
           <div className="space-y-3 mb-6">
-            {players
-              .sort((a, b) => b.score - a.score)
-              .map((player, index) => (
-                <div
-                  key={player.id}
-                  className={`${player.color} p-4 rounded-xl text-white shadow-sm min-h-16`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{player.icon}</span>
-                      <div className="font-medium">{player.name}</div>
-                    </div>
-                    <div className="text-2xl font-bold">{player.score}</div>
+            {players.map((player, index) => (
+              <div
+                key={player.id}
+                className={`${player.color} p-4 rounded-xl text-white shadow-sm min-h-16`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-2xl">{playerIcons[index]}</span>
+                    <div className="font-medium">{player.name}</div>
                   </div>
+                  <div className="text-2xl font-bold">{player.score}</div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
 
           <button
