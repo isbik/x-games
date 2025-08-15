@@ -78,5 +78,5 @@ body {
   background-image: radial-gradient(rgb(228, 228, 228) 1px, transparent 2px);
   background-size: 16px 16px;
   background-attachment: fixed;
-  @apply flex flex-col grow min-h-screen;
+  @apply flex flex-col grow min-h-dvh;
 }

@@ -2,7 +2,6 @@
 
 import type { GameSettings, Team } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle } from "@/components/ui/card";
 import { cn, shuffle } from "@/lib/utils";
 import { useEndTimer } from "@/shared/hooks/use-end-timer";
 import { useWordPacks } from "@/shared/hooks/use-word-packs";
@@ -107,42 +106,39 @@ export function GameQueue({
 
   return (
     <>
-      <CardHeader className="bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/5 border-b border-primary/10">
-        <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span
-              className={cn(
-                "text-3xl rounded-full size-12 flex items-center justify-center font-bold",
-                currentTeam.color
-              )}
-            >
-              {currentTeam.emoji}
-            </span>
-            <div className="space-y-1">
-              <span className="block text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary animate-text">
-                {currentTeam.name}
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-3xl font-mono font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            {Math.floor(timeLeft / 60)}:
-            {(timeLeft % 60).toString().padStart(2, "0")}
-            {isPlaying && (
-              <Button
-                size="icon"
-                className="text-lg bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
-                onClick={togglePause}
-              >
-                {isPaused ? (
-                  <PlayIcon className="h-6 w-6" />
-                ) : (
-                  <PauseIcon className="h-6 w-6" />
-                )}
-              </Button>
+      <div className="flex gap-2 py-4">
+        <div className="flex items-center gap-3 mr-auto">
+          <span
+            className={cn(
+              "text-3xl rounded-full size-12 flex items-center justify-center font-bold",
+              currentTeam.color
             )}
+          >
+            {currentTeam.emoji}
+          </span>
+          <div className="space-y-1">
+            <span className="block text-2xl font-bold">{currentTeam.name}</span>
           </div>
-        </CardTitle>
-      </CardHeader>
+        </div>
+
+        <div className="flex items-center gap-2 text-3xl font-mono font-bold">
+          {Math.floor(timeLeft / 60)}:
+          {(timeLeft % 60).toString().padStart(2, "0")}
+          {isPlaying && (
+            <Button
+              size="icon"
+              className="text-lg bg-blue-500 hover:bg-blue-600"
+              onClick={togglePause}
+            >
+              {isPaused ? (
+                <PlayIcon className="h-6 w-6" />
+              ) : (
+                <PauseIcon className="h-6 w-6" />
+              )}
+            </Button>
+          )}
+        </div>
+      </div>
 
       {isPlaying ? (
         <motion.div
@@ -191,7 +187,7 @@ export function GameQueue({
         </motion.div>
       ) : (
         <Button
-          className="m-4 mb-0 text-xl h-16 bg-gradient-to-r from-primary via-secondary to-primary"
+          className="text-xl h-16 bg-gradient-to-r from-primary via-secondary to-primary my-auto"
           onClick={startGame}
         >
           <PlayIcon className="h-6 w-6" /> Начать раунд

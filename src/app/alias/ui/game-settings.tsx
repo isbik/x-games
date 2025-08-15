@@ -6,10 +6,9 @@ import { useState } from "react";
 
 import type { GameSettings } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useSessionStorage } from "@/shared/hooks/use-session-storage";
-import { Switch } from "./ui/switch";
+import { Switch } from "../../../components/ui/switch";
 
 export function GameSettings({
   onSubmit,
@@ -29,13 +28,13 @@ export function GameSettings({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
-        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-          Настройка игры
-        </CardTitle>
-      </CardHeader>
-      <div className="space-y-4 p-4 bg-gray-50">
+    <form
+      className="flex flex-col max-h-dvh gap-4 py-4 grow overflow-hidden"
+      onSubmit={handleSubmit}
+    >
+      <h1>Настройки</h1>
+
+      <div className="space-y-2 overflow-auto -m-4 p-4 grow">
         <div className="space-y-2">
           <Label>Время игры (секунд)</Label>
           <div className="flex gap-2 flex-wrap">
@@ -82,13 +81,11 @@ export function GameSettings({
         </div>
       </div>
 
-      <div className="bg-black/20 h-[1px] mb-4"></div>
+      <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="mx-4">
-        <Button type="submit" className="w-full">
-          Начать игру
-        </Button>
-      </div>
+      <Button type="submit" className="w-full">
+        Начать игру
+      </Button>
     </form>
   );
 }

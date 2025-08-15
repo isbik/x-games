@@ -1,6 +1,7 @@
 "use client";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { PLAYER_ICONS } from "@/shared/constants";
 import { XIcon } from "lucide-react";
 import React, { useState } from "react";
 import { adultCategories, categories, letters } from "./constants";
@@ -16,113 +17,6 @@ export interface GameData {
   category: string;
   letter: string;
 }
-
-// icons.ts
-export const playerIcons = [
-  "🐱",
-  "🦊",
-  "🐼",
-  "🦁",
-  "🐯",
-  "🦄",
-  "🐶",
-  "🐷",
-  "🐸",
-  "🐵",
-  "🦉",
-  "🦋",
-  "🐢",
-  "🐙",
-  "🐝",
-  "🐭",
-  "🐹",
-  "🐰",
-  "🐻",
-  "🐨",
-  "🐯",
-  "🐴",
-  "🐮",
-  "🐷",
-  "🐸",
-  "🐵",
-  "🐔",
-  "🐧",
-  "🐦",
-  "🐤",
-  "🦆",
-  "🦅",
-  "🦉",
-  "🦇",
-  "🐺",
-  "🐗",
-  "🐴",
-  "🦄",
-  "🐝",
-  "🐛",
-  "🦋",
-  "🐌",
-  "🐞",
-  "🐜",
-  "🦗",
-  "🕷",
-  "🦂",
-  "🐢",
-  "🐍",
-  "🦎",
-  "🦖",
-  "🦕",
-  "🐙",
-  "🦑",
-  "🦐",
-  "🦞",
-  "🦀",
-  "🐡",
-  "🐠",
-  "🐟",
-  "🐬",
-  "🐳",
-  "🐋",
-  "🦈",
-  "🐊",
-  "🐅",
-  "🐆",
-  "🦓",
-  "🦍",
-  "🐘",
-  "🦏",
-  "🐪",
-  "🐫",
-  "🦒",
-  "🦘",
-  "🐃",
-  "🐂",
-  "🐄",
-  "🐎",
-  "🐖",
-  "🐏",
-  "🐑",
-  "🐐",
-  "🦙",
-  "🐕",
-  "🐩",
-  "🐈",
-  "🐓",
-  "🦃",
-  "🕊",
-  "🐇",
-  "🐿",
-  "🦔",
-  "🦝",
-  "🦨",
-  "🦡",
-  "🦦",
-  "🦥",
-  "🐁",
-  "🐀",
-  "🐿",
-  "🦔",
-  "👤",
-];
 
 // colors.ts
 export const playerColors = [
@@ -220,7 +114,7 @@ const App: React.FC = () => {
               {players.map((player, index) => (
                 <div key={player.id} className="flex items-center space-x-3">
                   <div className={cn("text-2xl rounded-full", player.color)}>
-                    {playerIcons[index]}
+                    {PLAYER_ICONS[index]}
                   </div>
                   <div className="flex-1">
                     <input
@@ -330,7 +224,7 @@ const App: React.FC = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl"> {playerIcons[index]}</span>
+                      <span className="text-2xl"> {PLAYER_ICONS[index]}</span>
                       <span
                         className={`font-medium ${
                           winners.includes(player.id)
@@ -401,7 +295,7 @@ const App: React.FC = () => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <span className="text-2xl">{playerIcons[index]}</span>
+                    <span className="text-2xl">{PLAYER_ICONS[index]}</span>
                     <div className="font-medium">{player.name}</div>
                   </div>
                   <div className="text-2xl font-bold">{player.score}</div>

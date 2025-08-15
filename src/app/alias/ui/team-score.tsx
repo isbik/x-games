@@ -1,36 +1,33 @@
 "use client";
 
+import type { GameSettings, Team } from "@/app/alias/page";
 import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
-import type { Team, GameSettings } from "@/app/alias/page";
 
 export function TeamScore({
   teams,
   currentTeam,
   settings,
   onNextTeam,
+  onReset,
 }: {
   teams: Team[];
   currentTeam: Team;
   settings: GameSettings;
   onNextTeam: () => void;
+  onReset: () => void;
 }) {
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
   const winner =
     sortedTeams[0].score >= settings.scoreToWin ? sortedTeams[0] : null;
 
   return (
-    <>
-      <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
-        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-          {winner ? "Игра окончена!" : "Текущие очки"}
-        </CardTitle>
-      </CardHeader>
+    <div className="flex flex-col max-h-dvh gap-4 py-4 grow">
+      <h1>{winner ? "Игра окончена!" : "Текущие очки"}</h1>
 
-      <div className="bg-black/20 h-[1px]"></div>
+      <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="space-y-2 p-4 bg-gray-50">
+      <div className="space-y-2 -m-4 p-4 bg-gray-50 overflow-auto grow">
         {teams.map((team) => (
           <div
             key={team.id}
@@ -50,14 +47,18 @@ export function TeamScore({
         ))}
       </div>
 
-      <div className="bg-black/20 h-[1px] mb-4"></div>
+      <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
       {winner ? (
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-primary">
+        <div className="flex flex-col gap-2">
+          <div className="justify-center inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-primary text-center">
             <Trophy className="h-5 w-5" />
-            <span className="font-medium">{winner.name} Wins!</span>
+            <span className="font-medium">{winner.name} выиграли!</span>
           </div>
+
+          <Button className="w-full" onClick={onReset}>
+            Сбросить
+          </Button>
         </div>
       ) : (
         <div className="mx-4">
@@ -66,6 +67,6 @@ export function TeamScore({
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 }

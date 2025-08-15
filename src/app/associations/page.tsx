@@ -1,5 +1,6 @@
 "use client";
 
+import { CardGame } from "@/components/card-game";
 import { Brain } from "lucide-react";
 import React, { useState } from "react";
 
@@ -47,8 +48,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-dvh px-4 pt-4 flex flex-col">
-      <div className="max-w-md w-full mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-6">
+    <div className="flex flex-col grow sm:py-4">
+      <CardGame className="gap-4">
         <div className="flex items-center justify-center space-x-2">
           <Brain className="w-8 h-8 text-purple-500" />
           <h1 className="text-2xl font-bold text-purple-600">Ассоциация</h1>
@@ -137,7 +138,7 @@ function App() {
             </div>
           </div>
         )}
-      </div>
+      </CardGame>
     </div>
   );
 }

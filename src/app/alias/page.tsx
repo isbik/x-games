@@ -1,11 +1,12 @@
 "use client";
 
-import { GameQueue } from "@/components/game-queue";
-import { GameSettings } from "@/components/game-settings";
-import { RoundReview } from "@/components/round-review";
-import { TeamScore } from "@/components/team-score";
-import { TeamSetup } from "@/components/team-setup";
-import { WordPacks } from "@/components/word-packs";
+import { GameQueue } from "@/app/alias/ui/game-queue";
+import { GameSettings } from "@/app/alias/ui/game-settings";
+import { RoundReview } from "@/app/alias/ui/round-review";
+import { TeamScore } from "@/app/alias/ui/team-score";
+import { TeamSetup } from "@/app/alias/ui/team-setup";
+import { WordPacks } from "@/app/alias/ui/word-packs";
+import { CardGame } from "@/components/card-game";
 import { useState } from "react";
 
 export type Team = {
@@ -94,8 +95,8 @@ export default function Game() {
   };
 
   return (
-    <div className="min-h-svh flex flex-col grow py-4">
-      <div className="mx-auto h-fit p-0 pb-4 flex flex-col w-full overflow-hidden max-w-xl bg-white rounded-2xl shadow-2xl shadow-slate-950">
+    <div className="flex flex-col grow sm:py-4">
+      <CardGame className="py-0 flex flex-col grow">
         {step === "setup" && <TeamSetup onSubmit={handleTeamsSubmit} />}
         {step === "packs" && <WordPacks onSubmit={handlePacksSelect} />}
         {step === "settings" && (
@@ -124,9 +125,10 @@ export default function Game() {
             currentTeam={teams[currentTeamIndex]}
             settings={settings}
             onNextTeam={handleNextTeam}
+            onReset={() => setStep("setup")}
           />
         )}
-      </div>
+      </CardGame>
     </div>
   );
 }

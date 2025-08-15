@@ -5,7 +5,6 @@ import type React from "react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { CardHeader, CardTitle } from "@/components/ui/card";
 import { useWordPacks } from "@/shared/hooks/use-word-packs";
 import { CheckIcon } from "lucide-react";
 
@@ -36,19 +35,20 @@ export function WordPacks({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
-        <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-          Выбрать набор слов
-        </CardTitle>
-      </CardHeader>
+    <form
+      className="flex flex-col max-h-dvh overflow-hidden py-4 gap-4"
+      onSubmit={handleSubmit}
+    >
+      <h1 className="border-b-">Выбрать набор слов</h1>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 bg-gray-50 p-4">
+      <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
+
+      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 overflow-auto -m-4 p-4 py-0">
         {packs.map((pack) => (
           <button
             key={pack.name}
             type="button"
-            className={`min-h-28 flex items-center justify-center relative flex-col rounded-lg border p-4 transition-colors hover:bg-muted ${
+            className={`min-h-32 flex items-center justify-center relative flex-col rounded-lg border p-4 transition-colors hover:bg-muted ${
               selectedPacks.includes(pack.name)
                 ? "border-primary bg-purple-500/10"
                 : "border-border"
@@ -68,17 +68,15 @@ export function WordPacks({
         ))}
       </div>
 
-      <div className="bg-black/20 h-[1px] mb-4"></div>
+      <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="mx-4">
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={selectedPacks.length === 0}
-        >
-          Настройка игры
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={selectedPacks.length === 0}
+      >
+        Настройка игры
+      </Button>
     </form>
   );
 }
