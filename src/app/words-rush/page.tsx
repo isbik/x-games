@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { PLAYER_ICONS } from "@/shared/constants";
 import { XIcon } from "lucide-react";
 import React, { useState } from "react";
-import { adultCategories, categories, letters } from "./constants";
+import { adultCategories, categories, LETTERS } from "./constants";
 
 export interface Player {
   id: string;
@@ -67,9 +67,9 @@ const App: React.FC = () => {
       Math.floor(Math.random() * target.length)
     ];
 
-    const randomLetter = letters.filter(
+    const randomLetter = LETTERS.filter(
       (letter) => letter !== currentRound?.letter
-    )[Math.floor(Math.random() * letters.length)];
+    )[Math.floor(Math.random() * LETTERS.length)];
 
     setCurrentRound({ category: randomCategory, letter: randomLetter });
     setWinners([]);

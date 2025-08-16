@@ -1,4 +1,4 @@
-export const letters = [
+export const LETTERS = [
   "А",
   "Б",
   "В",
