@@ -53,8 +53,8 @@ export function RoundReview({
             className={cn(
               "flex items-center justify-between rounded-lg border p-4 transition-colors bg-white",
               {
-                "border-blue-500": word.correct,
-                "border-red-500": !word.correct,
+                "border-green-500 bg-green-100": word.correct,
+                "border-red-500 bg-red-50": !word.correct,
               }
             )}
             onClick={() => toggleWord(index)}

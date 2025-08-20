@@ -59,9 +59,9 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col grow sm:py-4">
-      <CardGame>
-        <h1 className="text-3xl font-bold text-center text-purple-600 mb-4">
+    <div className="flex flex-col grow">
+      <CardGame className="m-4 rounded-xl">
+        <h1 className="text-3xl font-bold text-center text-blue-600 mb-4">
           Фанты
         </h1>
 
@@ -75,11 +75,11 @@ function App() {
                   onChange={(e) => setNewTask(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addTask()}
                   placeholder="Введите задание..."
-                  className="flex-1 p-3 px-4 border focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="flex-1 p-3 px-4 border focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Button
                   onClick={addTask}
-                  className="bg-purple-500 size-12 text-white p-2 hover:bg-purple-600 transition-colors shrink-0"
+                  className="bg-blue-500 size-12 text-white p-2 hover:bg-blue-600 transition-colors shrink-0"
                 >
                   <FaPlus />
                 </Button>
@@ -89,7 +89,7 @@ function App() {
                 <Switch
                   checked={showTasks}
                   onCheckedChange={(value) => setShowTasks(value)}
-                  className="mr-2 accent-purple-500"
+                  className="mr-2 accent-blue-500"
                   disabled={tasks.length !== 0}
                 />
                 <p>Показывать задания</p>
@@ -136,10 +136,10 @@ function App() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="mb-6 p-4 bg-purple-100 rounded-lg mt-2"
+                  className="mb-6 p-4 bg-blue-100 rounded-lg mt-2"
                 >
                   <h2 className="text-xl font-semibold mb-2">Ваше задание:</h2>
-                  <p className="text-2xl text-purple-600 break-all">
+                  <p className="text-2xl text-blue-600 break-all">
                     {currentTask.text}
                   </p>
                 </motion.div>
@@ -157,7 +157,7 @@ function App() {
             <div className="space-y-3">
               <button
                 onClick={drawTask}
-                className="w-full bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
               >
                 <FaRandom />
                 {remainingTasks.length === 0

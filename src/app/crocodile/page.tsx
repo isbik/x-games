@@ -1,145 +1,28 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Eye, EyeOff, Play, RefreshCw } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Eye,
+  EyeOff,
+  Play,
+  RefreshCw,
+} from "lucide-react";
 import { useState } from "react";
-
-const words = [
-  "Без труда не поймать рыбку из пруда",
-  "Кот наплакал",
-  "Тише едешь — дальше будешь",
-  "Как с гуся вода",
-  "Гол как сокол",
-  "Комар носа не подточит",
-  "Видит око, да зуб неймёт",
-  "Как две капли воды",
-  "Не в свои сани не садись",
-  "Баба с возу — кобыле легче",
-  "Достать до звезд",
-  "Одна нога здесь, другая там",
-  "Пальцем в небо",
-  "Когда рак на горе свистнет",
-  "Язык до Киева доведёт",
-  "Сидеть на двух стульях",
-  "Шило в мешке не утаишь",
-  "Волка ноги кормят",
-  "Бить баклуши",
-  "Голову морочить",
-  "Как корова языком слизала",
-  "Делать из мухи слона",
-  "Вертеться как белка в колесе",
-  "Кот наплакал",
-  "Чешуя отвалилась",
-  "Ходить вокруг да около",
-  "Руки не из того места",
-  "Шапочное знакомство",
-  "Прыгать выше головы",
-  "Как селедка в бочке",
-  "Пятое колесо в телеге",
-  "Съесть собаку",
-  "Курица не птица, Болгария не заграница",
-  "Как рыба в воде",
-  "Хватать звезды с неба",
-  "Как от козла молока",
-  "Плакать крокодильими слезами",
-  "Караул устал",
-  "Слон в посудной лавке",
-  "Яблоко раздора",
-  "Танцевать на граблях",
-  "Чайник закипел",
-  "Грести бабло лопатой",
-  "Как медведь на ухо наступил",
-  "Сесть в лужу",
-  "Глаза разбегаются",
-  "Шерше ля фам",
-  "Скатертью дорога",
-  "Душа в пятки ушла",
-  "Не все коту масленица",
-  "Выжать все соки",
-  "Снег на голову",
-  "Зарубить на носу",
-  "Звезды не сошлись",
-  "Кашу маслом не испортишь",
-  "Кто не рискует, тот не пьет шампанского",
-  "Яйцо курицу учит",
-  "Из пушки по воробьям",
-  "Кот из дома — мыши в пляс",
-  "На воре шапка горит",
-  "Где тонко, там и рвется",
-  "Два сапога пара",
-  "Как по маслу",
-  "Сверкать пятками",
-  "На все четыре стороны",
-  "В ус не дует",
-  "За семь верст киселя хлебать",
-  "Кот ученый",
-  "Ни рыба, ни мясо",
-  "Чем дальше в лес, тем больше дров",
-  "Водить за нос",
-  "Как сыр в масле",
-  "Съесть свой галстук",
-  "Драть как Сидорову козу",
-  "На рыбалке без червяка — как без рук",
-  "Руки в ноги — и вперед!",
-  "Накрутить на усы",
-  "Из грязи в князи",
-  "Волшебный пендель",
-  "Найти иголку в стоге сена",
-  "Петух клюнул в одно место",
-  "Жаба душит",
-  "Гроза в стакане воды",
-  "Песок сыпется",
-  "Не в бровь, а в глаз",
-  "Бросить якорь",
-  "Кто старое помянет, тому глаз вон",
-  "Семь пятниц на неделе",
-  "Одна голова хорошо, а две — лучше",
-  "Вертеть хвостом",
-  "Пальцы веером",
-  "Танцевать под дудку",
-  "Пух и прах",
-  "Держать хвост пистолетом",
-  "Слон и Моська",
-  "Черепаха в гипсе",
-  "Чешуя с глаз упала",
-  "Бегать за двумя зайцами",
-  "Почесать репу",
-  "Кот в мешке",
-  "Поймать синюю птицу",
-  "Развести руками",
-  "Слезть с печи",
-  "Петь дифирамбы",
-  "Жевать сопли",
-  "Грызть гранит науки",
-  "Ходить на ушах",
-  "Водой не разольешь",
-  "Потерять голову",
-  "Куриный разум",
-  "Чесать язык",
-  "Не бросай камни в чужой огород",
-  "Плясать под чужую дудку",
-  "Как снег на голову",
-  "Черт ногу сломит",
-  "Заткнуть за пояс",
-  "Лить из пустого в порожнее",
-  "Втирать очки",
-  "Прыгать как козел",
-  "Слоняться без дела",
-  "Заварить кашу",
-  "Тянуть кота за хвост",
-  "Вывести на чистую воду",
-];
+import { packs } from "./constants";
 
 function App() {
   const [currentWord, setCurrentWord] = useState("");
   const [isWordVisible, setIsWordVisible] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
-
+  const [selectedPack, setSelectedPack] = useState(Object.keys(packs)[0]);
+  const [isPackSelectOpen, setIsPackSelectOpen] = useState(false);
   const [prev, setPrev] = useState<string[]>([]);
 
   const getRandomWord = () => {
+    const words = packs[selectedPack];
     const randomIndex = Math.floor(Math.random() * words.length);
-
     const newWord = words[randomIndex];
 
     if (prev.includes(newWord) && prev.length === words.length) {
@@ -151,6 +34,17 @@ function App() {
     setIsWordVisible(true);
     setIsGameStarted(true);
     setPrev((prev) => [...prev, newWord]);
+  };
+
+  const handlePackSelect = (pack: string) => {
+    setSelectedPack(pack);
+    setIsPackSelectOpen(false);
+  };
+
+  const startGame = () => {
+    if (selectedPack) {
+      getRandomWord();
+    }
   };
 
   return (
@@ -168,13 +62,13 @@ function App() {
           <h1 className="text-4xl font-bold mb-2 text-white text-center">
             Крокодил 🐊
           </h1>
-          <p className="text-lg text-center text-white/90 mb-4">
+          <p className="text-center text-white/90 mb-4">
             Покажи слово, пусть другие угадают!
           </p>
           <h3 className="text-lg font-bold text-white mb-3">Как играть:</h3>
-          <ol className="space-y-2 text-white/90 list-decimal list-inside">
+          <ol className="space-y-2 text-white/90 list-decimal list-inside text-sm">
             <li>
-              Нажмите {`"`}Начать Игру{`"`} для получения слова
+              Выберите набор слов и нажмите {`"`}Начать Игру{`"`}
             </li>
             <li>
               Нажмите {`"`}Показать{`"`} чтобы увидеть слово
@@ -186,6 +80,60 @@ function App() {
             </li>
           </ol>
         </motion.div>
+
+        <AnimatePresence>
+          {!isGameStarted && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-white rounded-2xl p-5 border border-green-200 shadow-lg"
+            >
+              <h3 className="text-lg font-bold text-green-800 mb-3">
+                Выберите набор слов:
+              </h3>
+
+              <div className="relative">
+                <button
+                  onClick={() => setIsPackSelectOpen(!isPackSelectOpen)}
+                  className="w-full bg-green-100 hover:bg-green-200 text-green-900 px-4 py-3 rounded-xl font-medium transition-colors flex items-center justify-between"
+                >
+                  <span>{selectedPack}</span>
+                  {isPackSelectOpen ? (
+                    <ChevronUp size={20} />
+                  ) : (
+                    <ChevronDown size={20} />
+                  )}
+                </button>
+
+                <AnimatePresence>
+                  {isPackSelectOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute top-full left-0 right-0 mt-1 bg-white border border-green-200 rounded-xl shadow-lg z-10 overflow-hidden"
+                    >
+                      {Object.keys(packs).map((pack) => (
+                        <button
+                          key={pack}
+                          onClick={() => handlePackSelect(pack)}
+                          className={`w-full text-left px-4 py-3 hover:bg-green-100 transition-colors ${
+                            selectedPack === pack
+                              ? "bg-green-100 text-green-800 font-medium"
+                              : "text-gray-800"
+                          }`}
+                        >
+                          {pack} ({packs[pack].length} слов)
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="mt-auto"></div>
 
@@ -205,10 +153,11 @@ function App() {
                 exit={{ scale: 0.8, opacity: 0 }}
               >
                 <motion.button
-                  onClick={getRandomWord}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white px-6 py-4 rounded-2xl text-xl font-medium transition-colors flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  onClick={startGame}
+                  disabled={!selectedPack}
+                  className="w-full bg-white/20 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-4 rounded-2xl text-xl font-medium transition-colors flex items-center justify-center gap-2"
+                  whileHover={{ scale: selectedPack ? 1.02 : 1 }}
+                  whileTap={{ scale: selectedPack ? 0.98 : 1 }}
                 >
                   <Play size={24} />
                   Начать Игру
@@ -216,6 +165,11 @@ function App() {
               </motion.div>
             ) : (
               <>
+                <div className="mb-2">
+                  <span className="text-sm text-white/80">
+                    Набор: {selectedPack}
+                  </span>
+                </div>
                 <div
                   className="max-h-48 overflow-auto"
                   ref={(ref) => {
@@ -230,22 +184,13 @@ function App() {
                     </p>
                   ))}
                 </div>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentWord}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: isWordVisible ? 1 : 0,
-                      height: isWordVisible ? "auto" : 0,
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="mb-6 pointer-events-none"
-                  >
-                    <p className="text-4xl font-bold text-white">
-                      {currentWord}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
+                <div key={currentWord} className="mb-6 pointer-events-none">
+                  <p className="text-4xl font-bold text-white">
+                    {isWordVisible
+                      ? currentWord
+                      : "*".repeat(currentWord.length)}
+                  </p>
+                </div>
 
                 <div className="flex gap-3 z-10">
                   <motion.button

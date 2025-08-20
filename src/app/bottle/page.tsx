@@ -1,6 +1,5 @@
 "use client";
 
-import { CardGame } from "@/components/card-game";
 import { useState } from "react";
 
 const bottles = [
@@ -365,7 +364,7 @@ export default function BottleGame() {
 
   return (
     <>
-      <CardGame className="grow max-w-md w-full text-center bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200/50 mx-auto self-center">
+      <div className="flex flex-col min-h-screen p-8">
         <h1 className="text-4xl font-extrabold mb-6 text-gray-800 flex items-center justify-center gap-2">
           🍾 Бутылочка
         </h1>
@@ -408,10 +407,10 @@ export default function BottleGame() {
         </div>
 
         {/* Статус */}
-        <p className="mt-20 text-gray-500 text-sm">
+        <p className="mt-20 text-gray-500 text-sm text-center">
           {isSpinning ? <>&nbsp;</> : "Нажмите на бутылку, чтобы начать!"}
         </p>
-      </CardGame>
+      </div>
     </>
   );
 }

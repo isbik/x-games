@@ -30,6 +30,8 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(120);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
+  const [isShowAll, setIsShowAll] = useState(false);
+
   useEndTimer(timeLeft);
 
   useEffect(() => {
@@ -58,6 +60,7 @@ function App() {
     });
     setGameStarted(true);
     setTimeLeft(120);
+    setIsShowAll(false);
 
     setPlayers(shuffle(ANIMALS).slice(0, playerCount));
 
@@ -70,7 +73,18 @@ function App() {
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
-  const handleStart = () => {
+  const handleAction = () => {
+    if (isShowAll) {
+      handleStartGame();
+      return;
+    }
+
+    if (isTimerRunning) {
+      setIsShowAll(true);
+      setIsTimerRunning(false);
+      return;
+    }
+
     setIsTimerRunning(true);
   };
 
@@ -102,15 +116,13 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col grow sm:py-4 max-h-dvh overflow-hidden">
-      <CardGame className="gap-4 grow overflow-hidden">
-        <h1 className="text-4xl font-bold text-center text-purple-600">
-          Шпион
-        </h1>
+    <div className="overflow-auto max-h-dvh">
+      <CardGame className="gap-4 m-4 rounded-xl pt-6">
+        <h1 className="text-4xl font-bold text-center text-blue-600">Шпион</h1>
 
         {!gameStarted ? (
           <>
-            <div className="bg-purple-800 text-white rounded-xl p-4 space-y-4">
+            <div className="bg-blue-100 rounded-xl p-4 space-y-4">
               <p className="text-lg">Правила игры:</p>
               <ul className="list-disc list-inside space-y-2">
                 <li>Каждому игроку будет показана его роль</li>
@@ -121,24 +133,24 @@ function App() {
             </div>
 
             <div className="flex items-center justify-center space-x-4 my-4">
-              <Users className="w-8 h-8 text-purple-500" />
+              <Users className="w-8 h-8 text-blue-500" />
               <div className="flex items-center space-x-4">
                 <button
                   disabled={playerCount <= 3}
                   onClick={() => setPlayerCount(Math.max(3, playerCount - 1))}
-                  className="bg-purple-100 hover:bg-purple-200 rounded-full p-2 disabled:opacity-50"
+                  className="bg-blue-100 hover:bg-blue-200 rounded-full p-2 disabled:opacity-50"
                 >
-                  <MinusCircle className="w-6 h-6 text-purple-600" />
+                  <MinusCircle className="w-6 h-6 text-blue-600" />
                 </button>
-                <span className="text-2xl font-bold text-purple-600">
+                <span className="text-2xl font-bold text-blue-600 tabular-nums">
                   {playerCount}
                 </span>
                 <button
                   disabled={playerCount >= ANIMALS.length}
                   onClick={() => setPlayerCount(playerCount + 1)}
-                  className="bg-purple-100 hover:bg-purple-200 rounded-full p-2 disabled:opacity-50"
+                  className="bg-blue-100 hover:bg-blue-200 rounded-full p-2 disabled:opacity-50"
                 >
-                  <PlusCircle className="w-6 h-6 text-purple-600" />
+                  <PlusCircle className="w-6 h-6 text-blue-600" />
                 </button>
               </div>
             </div>
@@ -154,16 +166,14 @@ function App() {
         ) : (
           <>
             <div className="flex justify-center items-center space-x-4">
-              <Timer className="w-8 h-8 text-purple-500" />
-              <span className="text-4xl font-bold text-purple-600">
+              <Timer className="w-8 h-8 text-blue-500" />
+              <span className="text-4xl font-bold text-blue-600">
                 {formatTime(timeLeft)}
               </span>
             </div>
-
             <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
-
-            <div className="bg-purple-50 p-4 space-y-4 -m-4 overflow-auto">
-              <div className="flex flex-col items-center space-y-2">
+            <div className="bg-blue-50 p-4 space-y-4 -m-4  grow">
+              <div className="flex flex-col items-center space-y-2 overflow-auto">
                 {players.map((player, index) => {
                   const isSpy = index + 1 === gameData?.spyPlayer;
                   const isViewed =
@@ -176,20 +186,20 @@ function App() {
                           handleShowRole(player);
                         }}
                         className={cn(
-                          "border-purple-600 bg-white border-2 hover:bg-purple-50 text-purple-600 font-bold py-3 px-6 rounded-xl w-full flex items-center space-x-2",
+                          "border-blue-600 bg-white border-2 hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-xl w-full flex items-center space-x-2",
                           isViewed && "border-black/10 bg-black/5"
                         )}
                       >
                         <span className="mr-auto text-lg">{player}</span>
 
-                        {!showedRoles.includes(player) && (
+                        {!showedRoles.includes(player) && !isShowAll && (
                           <>
                             <Eye className="size-5" />
                             <span>Показать роль</span>
                           </>
                         )}
 
-                        {showPlayerRole === player && (
+                        {(showPlayerRole === player || isShowAll) && (
                           <div
                             className={`text-lg font-bold ${
                               isSpy ? "text-red-500" : "text-green-600"
@@ -204,7 +214,6 @@ function App() {
                 })}
               </div>
             </div>
-
             <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
             <div className="flex space-x-4">
@@ -215,21 +224,19 @@ function App() {
                   setShowPlayerRole(null);
                   setIsTimerRunning(false);
                 }}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-4 px-8 rounded-xl flex items-center justify-center space-x-2 transition-colors"
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-4 px-8 rounded-xl flex items-center justify-center space-x-2 transition-colors whitespace-nowrap"
               >
                 <Shuffle className="w-6 h-6" />
                 <span>Новая игра</span>
               </button>
               <button
-                disabled={isTimerRunning}
-                onClick={handleStart}
+                onClick={handleAction}
                 className={cn(
-                  "flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center space-x-2 transition-colors",
-                  isTimerRunning && "opacity-50 cursor-not-allowed"
+                  "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center space-x-2 transition-colors"
                 )}
               >
                 <Vote className="w-6 h-6" />
-                <span>Начать</span>
+                <span>{isTimerRunning ? "Завершить" : "Начать"}</span>
               </button>
             </div>
           </>
