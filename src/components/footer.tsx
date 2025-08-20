@@ -18,7 +18,9 @@ const Footer = () => {
         </div>
 
         <div className="max-sm:flex gap-2">
-          <h3 className="text-lg font-semibold mb-4">Присоединяйтесь к нам</h3>
+          <h3 className="text-lg font-semibold sm:mb-4">
+            Присоединяйтесь к нам
+          </h3>
           <div className="flex space-x-4">
             <a
               href="https://t.me/board_time"
