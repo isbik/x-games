@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { FaTelegram } from "react-icons/fa";
 
 const Footer = () => {
-  const date = useRef(new Date()).current.getFullYear();
+  const date = useRef(new Date().getFullYear()).current;
 
   return (
     <footer className="mt-auto bg-gradient-to-br bg-white backdrop-blur border-t border-gray-300/30">

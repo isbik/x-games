@@ -90,6 +90,8 @@ const games = [
 export default function Games() {
   return (
     <>
+      {/* <Header /> */}
+
       <div className="max-w-7xl mx-auto flex flex-col grow gap-4 p-4">
         <div className="text-center relative sm:py-8">
           <div className="relative inline-block mx-auto">
@@ -111,7 +113,7 @@ export default function Games() {
           {games.map((game) => (
             <Link key={game.id} href={game.url} className="group">
               <Card
-                className={`transition-all duration-300 h-full rounded-2xl bg-gradient-to-br ${game.bgColor} border-0 overflow-hidden relative max-sm:aspect-square`}
+                className={`transition-all duration-300 h-full rounded-2xl bg-gradient-to-br ${game.bgColor} border-0 overflow-hidden relative`}
               >
                 <div className="absolute inset-0 bg-white/10 backdrop-blur-sm group-hover:opacity-0 transition-opacity duration-300" />
 
