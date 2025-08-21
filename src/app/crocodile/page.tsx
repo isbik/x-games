@@ -1,14 +1,8 @@
 "use client";
 
+import { Select } from "@/components/ui/select";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ChevronDown,
-  ChevronUp,
-  Eye,
-  EyeOff,
-  Play,
-  RefreshCw,
-} from "lucide-react";
+import { Eye, EyeOff, Play, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { packs } from "./constants";
 
@@ -87,50 +81,14 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-white rounded-2xl p-5 border border-green-200 shadow-lg"
+              className="bg-white rounded-2xl p-5 border border-blue-200 shadow-lg"
             >
-              <h3 className="text-lg font-bold text-green-800 mb-3">
-                Выберите набор слов:
-              </h3>
-
-              <div className="relative">
-                <button
-                  onClick={() => setIsPackSelectOpen(!isPackSelectOpen)}
-                  className="w-full bg-green-100 hover:bg-green-200 text-green-900 px-4 py-3 rounded-xl font-medium transition-colors flex items-center justify-between"
-                >
-                  <span>{selectedPack}</span>
-                  {isPackSelectOpen ? (
-                    <ChevronUp size={20} />
-                  ) : (
-                    <ChevronDown size={20} />
-                  )}
-                </button>
-
-                <AnimatePresence>
-                  {isPackSelectOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute top-full left-0 right-0 mt-1 bg-white border border-green-200 rounded-xl shadow-lg z-10 overflow-hidden"
-                    >
-                      {Object.keys(packs).map((pack) => (
-                        <button
-                          key={pack}
-                          onClick={() => handlePackSelect(pack)}
-                          className={`w-full text-left px-4 py-3 hover:bg-green-100 transition-colors ${
-                            selectedPack === pack
-                              ? "bg-green-100 text-green-800 font-medium"
-                              : "text-gray-800"
-                          }`}
-                        >
-                          {pack} ({packs[pack].length} слов)
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+              <Select
+                value={selectedPack}
+                items={Object.keys(packs)}
+                onChangeValue={handlePackSelect}
+                label="Выберите набор слов:"
+              />
             </motion.div>
           )}
         </AnimatePresence>

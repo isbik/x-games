@@ -36,15 +36,12 @@ export function WordPacks({
 
   console.log(packs.map((pack) => pack.name));
   return (
-    <form
-      className="flex flex-col max-h-dvh overflow-hidden py-4 gap-4"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col py-4 gap-4 grow" onSubmit={handleSubmit}>
       <h1 className="border-b-">Выбрать набор слов</h1>
 
       <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 overflow-auto -m-4 p-4">
+      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 -m-4 p-4 mb-auto">
         {packs.map((pack) => (
           <button
             key={pack.name}

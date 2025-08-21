@@ -95,8 +95,8 @@ export default function Game() {
   };
 
   return (
-    <div className="flex flex-col grow sm:py-4">
-      <CardGame className="py-0 flex flex-col grow">
+    <div className="flex flex-col grow">
+      <CardGame className="py-0 flex flex-col grow m-4">
         {step === "setup" && <TeamSetup onSubmit={handleTeamsSubmit} />}
         {step === "packs" && <WordPacks onSubmit={handlePacksSelect} />}
         {step === "settings" && (

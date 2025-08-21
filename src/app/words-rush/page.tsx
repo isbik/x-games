@@ -1,10 +1,10 @@
 "use client";
-import { Switch } from "@/components/ui/switch";
+import { Select } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { PLAYER_ICONS } from "@/shared/constants";
 import { XIcon } from "lucide-react";
 import React, { useState } from "react";
-import { adultCategories, categories, LETTERS } from "./constants";
+import { LETTERS, packs } from "./constants";
 
 export interface Player {
   id: string;
@@ -39,7 +39,8 @@ export const playerColors = [
 ];
 
 const App: React.FC = () => {
-  const [isAdult, setIsAdult] = useState(false);
+  const [selectedPack, setSelectedPack] = useState(Object.keys(packs)[0]);
+
   const [gameState, setGameState] = useState<"setup" | "playing" | "round">(
     "setup"
   );
@@ -62,7 +63,7 @@ const App: React.FC = () => {
   const [winners, setWinners] = useState<string[]>([]);
 
   const startRound = () => {
-    const target = isAdult ? adultCategories : categories;
+    const target = packs[selectedPack];
     const randomCategory = target.filter((c) => c !== currentRound?.category)[
       Math.floor(Math.random() * target.length)
     ];
@@ -105,11 +106,10 @@ const App: React.FC = () => {
     return (
       <div className="min-h-screen p-4">
         <div className="max-w-md mx-auto">
-          <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
-            👤 Введите имена игроков
-          </h1>
-
           <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+              👤 Введите имена игроков
+            </h1>
             <div className="space-y-4 mb-6">
               {players.map((player, index) => (
                 <div key={player.id} className="flex items-center space-x-3">
@@ -146,15 +146,14 @@ const App: React.FC = () => {
               ))}
             </div>
 
-            <label className="flex items-center space-x-2 mb-4">
-              <Switch
-                checked={isAdult}
-                onCheckedChange={(value) => setIsAdult(value)}
+            <div className="mb-6">
+              <Select
+                value={selectedPack}
+                items={Object.keys(packs)}
+                onChangeValue={(v) => setSelectedPack(v)}
+                label="Выберите набор слов:"
               />
-              <span className="text-sm font-medium text-gray-700">
-                Для взрослых
-              </span>
-            </label>
+            </div>
 
             <button
               disabled={players.length >= 16}
