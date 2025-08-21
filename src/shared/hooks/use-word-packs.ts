@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useWordPacks = () => {
   const [wordPacks, setWordPacks] = useState<
-    Array<{ name: string; words: string[] }>
+    Array<{ name: string; words: string[]; emoji: string }>
   >([]);
   useEffect(() => {
     fetch("/assets/words.json", {

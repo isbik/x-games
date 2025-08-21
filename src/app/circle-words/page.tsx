@@ -112,7 +112,7 @@ export default function WordFlashGame() {
     setUsedLetters([]);
     setSpinRotation(0);
     startRound();
-    setTheme(getRandomTheme())
+    setTheme(getRandomTheme());
   };
 
   const renderLetterWheel = () => {
@@ -334,7 +334,7 @@ export default function WordFlashGame() {
 
             <Button
               onClick={startGame}
-              className="w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+              className="w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
             >
               🎮 Начать игру
             </Button>
@@ -358,7 +358,7 @@ export default function WordFlashGame() {
 
             <div className="text-center">
               <div className="text-sm font-medium text-gray-500 mb-1">Тема</div>
-              <div className="text-2xl font-bold text-gray-800 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold text-gray-800 bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
                 {theme || <span>&nbsp;</span>}
               </div>
             </div>

@@ -24,7 +24,7 @@ export const playerColors = [
   "bg-blue-400",
   "bg-green-400",
   "bg-yellow-400",
-  "bg-purple-400",
+  "bg-blue-400",
   "bg-pink-400",
   "bg-indigo-400",
   "bg-teal-400",
@@ -171,7 +171,7 @@ const App: React.FC = () => {
                 };
                 setPlayers((prev) => [...prev, newPlayer]);
               }}
-              className="w-full disabled:opacity-50 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all mb-4"
+              className="w-full disabled:opacity-50 bg-gradient-to-r from-blue-500 to-blue-500 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all mb-4"
             >
               Добавить игрока
             </button>

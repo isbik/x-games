@@ -187,7 +187,7 @@ export function GameQueue({
         </motion.div>
       ) : (
         <Button
-          className="text-xl h-16 bg-gradient-to-r from-primary via-secondary to-primary my-auto"
+          className="text-xl h-16 bg-blue-500 my-auto"
           onClick={startGame}
         >
           <PlayIcon className="h-6 w-6" /> Начать раунд

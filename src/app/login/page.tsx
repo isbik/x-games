@@ -41,7 +41,7 @@ const LoginForm = () => {
               type="email"
               autoComplete="email"
               required
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Email"
             />
           </div>
@@ -62,7 +62,7 @@ const LoginForm = () => {
               type="password"
               autoComplete="current-password"
               required
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Пароль"
             />
           </div>
@@ -93,14 +93,14 @@ const LoginMenu = () => {
           <Dice3 size={48} className="text-white" />
           <h1 className="text-4xl font-bold">BoardTime</h1>
         </Link>
-        <p className="text-purple-100 mt-2 text-lg max-w-sm">
+        <p className="text-blue-100 mt-2 text-lg max-w-sm">
           Мир игр у вас под рукой.
           <br />
           Войдите, чтобы начать!
         </p>
       </div>
 
-      <div className="mt-4 text-purple-200 text-xs flex items-center">
+      <div className="mt-4 text-blue-200 text-xs flex items-center">
         <Copyright size={14} className="mr-1" />
         <p>{new Date().getFullYear()} BoardTime. Все права защищены.</p>
       </div>
@@ -112,7 +112,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 md:p-8 font-sans">
       <div className="w-full max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl bg-white flex flex-col md:flex-row">
-        <div className="flex-none w-full md:w-1/3 p-8 md:p-12 text-white bg-gradient-to-b from-indigo-600 to-purple-700 flex flex-col justify-between items-start rounded-3xl md:rounded-r-none">
+        <div className="flex-none w-full md:w-1/3 p-8 md:p-12 text-white bg-gradient-to-b from-indigo-600 to-blue-700 flex flex-col justify-between items-start rounded-3xl md:rounded-r-none">
           <LoginMenu />
         </div>
 

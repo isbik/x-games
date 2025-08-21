@@ -34,6 +34,7 @@ export function WordPacks({
     }
   };
 
+  console.log(packs.map((pack) => pack.name));
   return (
     <form
       className="flex flex-col max-h-dvh overflow-hidden py-4 gap-4"
@@ -43,23 +44,24 @@ export function WordPacks({
 
       <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 overflow-auto -m-4 p-4 py-0">
+      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 overflow-auto -m-4 p-4">
         {packs.map((pack) => (
           <button
             key={pack.name}
             type="button"
-            className={`min-h-32 flex items-center justify-center relative flex-col rounded-lg border p-4 transition-colors hover:bg-muted ${
+            className={`min-h-32 flex items-center justify-center relative flex-col rounded-lg border p-4 transition-colors hover:bg-blue-500/10 ${
               selectedPacks.includes(pack.name)
-                ? "border-primary bg-purple-500/10"
-                : "border-border"
+                ? "border-blue-500 bg-blue-500/20"
+                : "border-gray-200"
             }`}
             onClick={() => togglePack(pack.name)}
           >
             {selectedPacks.includes(pack.name) && (
-              <div className="absolute right-2 top-2">
-                <CheckIcon className="size-6 text-primary" />
+              <div className="absolute right-2 top-2 bg-blue-500 rounded-full p-1">
+                <CheckIcon className="size-4 text-white" />
               </div>
             )}
+            <p className="text-xl">{pack.emoji}</p>
             <h3 className="mt-2 font-medium text-lg">{pack.name}</h3>
             <p className="text-sm text-muted-foreground">
               {pack.words.length} слов

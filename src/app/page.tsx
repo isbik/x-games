@@ -12,9 +12,9 @@ const games = [
       "Объясняй слова без их названия! Сможешь ли ты перехитрить друзей?",
     icon: "🎭",
     url: "/alias",
-    bgColor: "from-purple-400 to-indigo-500",
-    borderColor: "border-purple-400",
-    hoverColor: "hover:shadow-purple-200",
+    bgColor: "from-blue-400 to-indigo-500",
+    borderColor: "border-blue-400",
+    hoverColor: "hover:shadow-blue-200",
   },
   {
     id: "2",
