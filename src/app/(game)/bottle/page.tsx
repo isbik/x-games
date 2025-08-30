@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 const bottles = [
@@ -243,7 +245,7 @@ const bottles = [
           y="85"
           textAnchor="middle"
           fill="#8b0000"
-          fontSize="6"
+          fontSize="3"
           fontWeight="bold"
         >
           ВЫДЕРЖКА
@@ -323,12 +325,12 @@ const bottles = [
           y="75"
           textAnchor="middle"
           fill="#8b0000"
-          fontSize="4"
+          fontSize="3"
           fontWeight="bold"
         >
           ПРЕМИУМ
         </text>
-        <text x="19" y="82" textAnchor="middle" fill="#333" fontSize="3">
+        <text x="19" y="82" textAnchor="middle" fill="#333" fontSize="2.5">
           ШАМПАНСКОЕ
         </text>
         <rect x="11" y="85" width="16" height="1" fill="#daa520" rx="0.5" />
@@ -368,18 +370,15 @@ export default function BottleGame() {
         <div className="mb-24">
           <div className="flex flex-wrap justify-center gap-2">
             {bottles.map((bottle, index) => (
-              <button
+              <Button
+                className={cn(selectedBottle === index ? "" : "bg-white")}
+                variant={selectedBottle === index ? "default" : "outline"}
                 key={index}
                 onClick={() => setSelectedBottle(index)}
                 disabled={isSpinning}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-                  selectedBottle === index
-                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg scale-105"
-                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm"
-                }`}
               >
                 {bottle.name}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -403,8 +402,13 @@ export default function BottleGame() {
         </div>
 
         {/* Статус */}
-        <p className="mt-20 text-gray-500 text-sm text-center">
-          {isSpinning ? <>&nbsp;</> : "Нажмите на бутылку, чтобы начать!"}
+        <p
+          className={cn(
+            "mt-20 text-gray-700 text-sm text-center bg-white w-fit mx-auto px-4 py-2 rounded-full",
+            isSpinning && "opacity-0 pointer-events-none"
+          )}
+        >
+          {"Нажмите на бутылку, чтобы начать!"}
         </p>
       </div>
     </>

@@ -1,5 +1,6 @@
 "use client";
 
+import { CardGame } from "@/components/card-game";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -122,167 +123,161 @@ export default function WordFlashGame() {
     const centerY = 160;
 
     return (
-      <div className="relative w-80 h-80 mx-auto">
-        <div className="w-full h-full rounded-full bg-white shadow-lg relative border-4 border-gray-200">
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 320 320">
-            {letters.map((letter, index) => {
-              const startAngle = (index * segmentAngle - 90) * (Math.PI / 180);
-              const endAngle =
-                ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
+      <div className="relative size-80 mx-auto">
+        <svg className="inset-0" viewBox="0 0 320 320">
+          {letters.map((letter, index) => {
+            const startAngle = (index * segmentAngle - 90) * (Math.PI / 180);
+            const endAngle =
+              ((index + 1) * segmentAngle - 90) * (Math.PI / 180);
 
-              const x1 = 160 + 140 * Math.cos(startAngle);
-              const y1 = 160 + 140 * Math.sin(startAngle);
-              const x2 = 160 + 140 * Math.cos(endAngle);
-              const y2 = 160 + 140 * Math.sin(endAngle);
+            const x1 = 160 + 140 * Math.cos(startAngle);
+            const y1 = 160 + 140 * Math.sin(startAngle);
+            const x2 = 160 + 140 * Math.cos(endAngle);
+            const y2 = 160 + 140 * Math.sin(endAngle);
 
-              const largeArcFlag = segmentAngle > 180 ? 1 : 0;
+            const largeArcFlag = segmentAngle > 180 ? 1 : 0;
 
-              const pathData = [
-                `M 160 160`,
-                `L ${x1} ${y1}`,
-                `A 140 140 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-                "Z",
-              ].join(" ");
+            const pathData = [
+              `M 160 160`,
+              `L ${x1} ${y1}`,
+              `A 140 140 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+              "Z",
+            ].join(" ");
 
-              const isCurrentLetter = letter === currentLetter && !isSpinning;
-              const isUsedLetter =
-                usedLetters.includes(letter) && !allowRepeats;
-              const isHighlighted = highlightedLetters.includes(letter);
+            const isCurrentLetter = letter === currentLetter && !isSpinning;
+            const isUsedLetter = usedLetters.includes(letter) && !allowRepeats;
+            const isHighlighted = highlightedLetters.includes(letter);
 
-              return (
-                <g key={`segment-${letter}-${index}`}>
-                  <path
-                    d={pathData}
-                    fill={
-                      isCurrentLetter
-                        ? "url(#currentGradient)"
-                        : isHighlighted
-                        ? "#fef08a" // Highlight color
-                        : isUsedLetter
-                        ? "#f3f4f6"
-                        : index % 2 === 0
-                        ? "#dbeafe"
-                        : "#e0e7ff"
-                    }
-                    stroke="#ffffff"
-                    strokeWidth="2"
-                    className="transition-all duration-300"
-                  ></path>
-                </g>
-              );
-            })}
-
-            <defs>
-              <linearGradient
-                id="currentGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="#fbbf24" />
-                <stop offset="100%" stopColor="#f59e0b" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <div className="absolute inset-0">
-            {letters.map((letter, index) => {
-              const segmentCenterAngle =
-                (index * segmentAngle + segmentAngle / 2) * (Math.PI / 180);
-              const letterRadius = 120;
-              const x =
-                centerX +
-                letterRadius * Math.cos(segmentCenterAngle - Math.PI / 2);
-              const y =
-                centerY +
-                letterRadius * Math.sin(segmentCenterAngle - Math.PI / 2);
-
-              const isCurrentLetter = letter === currentLetter && !isSpinning;
-              const isUsedLetter =
-                usedLetters.includes(letter) && !allowRepeats;
-              const isHighlighted = highlightedLetters.includes(letter);
-
-              return (
-                <div
-                  key={`letter-${letter}-${index}`}
-                  className={`absolute w-8 h-8 flex items-center justify-center rounded-full font-bold text-lg transition-all duration-300 ${
+            return (
+              <g key={`segment-${letter}-${index}`}>
+                <path
+                  d={pathData}
+                  fill={
                     isCurrentLetter
-                      ? "text-white bg-amber-500 shadow-lg"
+                      ? "url(#currentGradient)"
                       : isHighlighted
-                      ? "text-black bg-yellow-300 shadow-md" // Highlight style
+                      ? "#fef08a" // Highlight color
                       : isUsedLetter
-                      ? "text-gray-400"
-                      : "text-blue-800"
-                  }`}
-                  style={{
-                    left: x - 16,
-                    top: y - 16,
-                    transform: "translate(0, 0)",
-                  }}
-                >
-                  {letter}
-                </div>
-              );
-            })}
-          </div>
+                      ? "#f3f4f6"
+                      : index % 2 === 0
+                      ? "#dbeafe"
+                      : "#e0e7ff"
+                  }
+                  stroke="#ffffff"
+                  strokeWidth="2"
+                  className="transition-all duration-300"
+                ></path>
+              </g>
+            );
+          })}
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            {gameState === "spinning" ? (
-              <></>
-            ) : (
-              <>
-                <div
-                  className={`text-6xl font-bold mb-2 ${
-                    timeLeft <= 3
-                      ? "text-red-500 animate-pulse"
-                      : "text-blue-600"
-                  }`}
-                >
-                  {currentLetter}
-                </div>
-                <div className="text-sm font-medium text-gray-500">
-                  {timeLeft}с
-                </div>
-              </>
-            )}
-          </div>
+          <defs>
+            <linearGradient
+              id="currentGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#fbbf24" />
+              <stop offset="100%" stopColor="#f59e0b" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div className="absolute inset-0">
+          {letters.map((letter, index) => {
+            const segmentCenterAngle =
+              (index * segmentAngle + segmentAngle / 2) * (Math.PI / 180);
+            const letterRadius = 120;
+            const x =
+              centerX +
+              letterRadius * Math.cos(segmentCenterAngle - Math.PI / 2);
+            const y =
+              centerY +
+              letterRadius * Math.sin(segmentCenterAngle - Math.PI / 2);
+
+            const isCurrentLetter = letter === currentLetter && !isSpinning;
+            const isUsedLetter = usedLetters.includes(letter) && !allowRepeats;
+            const isHighlighted = highlightedLetters.includes(letter);
+
+            return (
+              <div
+                key={`letter-${letter}-${index}`}
+                className={`absolute w-8 h-8 flex items-center justify-center rounded-full font-bold text-lg transition-all duration-300 ${
+                  isCurrentLetter
+                    ? "text-white bg-amber-500 shadow-lg"
+                    : isHighlighted
+                    ? "text-black bg-yellow-300 shadow-md" // Highlight style
+                    : isUsedLetter
+                    ? "text-gray-400"
+                    : "text-blue-800"
+                }`}
+                style={{
+                  left: x - 16,
+                  top: y - 16,
+                  transform: "translate(0, 0)",
+                }}
+              >
+                {letter}
+              </div>
+            );
+          })}
         </div>
 
-        {gameState === "playing" && (
-          <svg className="absolute inset-0 w-full h-full -rotate-90">
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          {gameState === "spinning" ? (
+            <></>
+          ) : (
+            <>
+              <div
+                className={`text-5xl animate-pulse font-bold bg-white aspect-square rounded-full flex items-center justify-center p-3 ${
+                  timeLeft <= 3 ? "text-red-500" : "text-blue-600"
+                }`}
+              >
+                {currentLetter}
+              </div>
+              <div className="text-sm font-medium text-gray-500 bg-white rounded-full px-2 py-1">
+                {timeLeft}с
+              </div>
+            </>
+          )}
+        </div>
+
+        <svg className="absolute inset-0 w-full h-full -rotate-90">
+          <circle
+            cx="160"
+            cy="160"
+            r="146"
+            fill="none"
+            stroke="#e2e8f0"
+            strokeWidth="4"
+            opacity="0.3"
+          />
+          {gameState === "playing" && (
             <circle
               cx="160"
               cy="160"
-              r="150"
-              fill="none"
-              stroke="#e2e8f0"
-              strokeWidth="4"
-              opacity="0.3"
-            />
-            <circle
-              cx="160"
-              cy="160"
-              r="150"
+              r="140"
               fill="none"
               stroke="#3b82f6"
-              strokeWidth="4"
+              strokeWidth="6"
               strokeDasharray="942"
               strokeDashoffset={942 - (942 * timeLeft) / timerDuration}
               strokeLinecap="round"
               className="transition-all duration-1000"
             />
-          </svg>
-        )}
+          )}
+        </svg>
       </div>
     );
   };
 
   return (
     <div className="grow flex items-center justify-center p-4">
-      <div className="max-w-xl w-full">
+      <CardGame className="max-w-md w-full flex flex-col gap-4">
         {gameState === "settings" && (
-          <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6">
+          <>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -334,13 +329,13 @@ export default function WordFlashGame() {
             >
               🎮 Начать игру
             </Button>
-          </div>
+          </>
         )}
 
         {(gameState === "playing" ||
           gameState === "roundEnd" ||
           gameState === "spinning") && (
-          <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6">
+          <>
             <div className="flex justify-between items-center">
               <Button
                 variant="ghost"
@@ -389,9 +384,9 @@ export default function WordFlashGame() {
                 </>
               )}
             </div>
-          </div>
+          </>
         )}
-      </div>
+      </CardGame>
     </div>
   );
 }

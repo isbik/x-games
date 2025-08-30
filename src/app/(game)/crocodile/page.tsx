@@ -91,30 +91,17 @@ function App() {
 
         <div className="mt-auto"></div>
 
-        <motion.div
-          layout
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          className="bg-blue-700 rounded-t-3xl p-6"
-        >
+        <div className="bg-blue-700 rounded-t-3xl p-6">
           <AnimatePresence mode="wait">
             {!isGameStarted ? (
-              <motion.div
-                key="start"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+              <Button
+                onClick={startGame}
+                disabled={!selectedPack}
+                className="w-full py-6 text-lg font-bold"
               >
-                <Button
-                  onClick={startGame}
-                  disabled={!selectedPack}
-                  className="w-full py-6 text-lg font-bold"
-                >
-                  <Play className="size-4" />
-                  Начать Игру
-                </Button>
-              </motion.div>
+                <Play className="size-4" />
+                Начать Игру
+              </Button>
             ) : (
               <>
                 <div className="mb-2">
@@ -123,7 +110,7 @@ function App() {
                   </span>
                 </div>
                 <div
-                  className="max-h-48 overflow-auto"
+                  className="max-h-48 overflow-auto no-scrollbar"
                   ref={(ref) => {
                     if (ref) {
                       ref.scrollTop = ref.scrollHeight;
@@ -168,7 +155,7 @@ function App() {
               </>
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

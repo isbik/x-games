@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { PLAYER_ICONS } from "@/shared/constants";
-import { PlusIcon, Trash2Icon } from "lucide-react";
+import { PlusIcon, X } from "lucide-react";
 import { useState } from "react";
 
 const COLORS = [
@@ -85,36 +85,24 @@ export function TeamSetup({ onSubmit }: { onSubmit: (teams: Team[]) => void }) {
 
   return (
     <form
-      className="flex flex-col max-h-dvh gap-4 py-4 grow overflow-hidden"
+      className="flex flex-col gap-4 py-4 grow overflow-hidden"
       onSubmit={handleSubmit}
     >
-      <h1>Выбор команды</h1>
-
-      <div className="space-y-2 overflow-auto -m-4 p-4 grow">
+      <div className="space-y-4 mb-6">
         {teams.map((team) => (
-          <div
-            key={team.id}
-            className={cn(
-              "flex items-center gap-4 rounded-lg border p-4 flex-wrap bg-gray-50 h-24"
-            )}
-          >
-            <div className="flex flex-1">
-              <span
-                className={cn(
-                  "inline-flex h-8 w-8 mr-2 items-center justify-center rounded-full shrink-0",
-                  team.color
-                )}
-              >
-                {team.emoji}
-              </span>
-              <Input
-                id={`team-${team.id}`}
-                value={team.name}
-                onChange={(e) => updateTeam(team.id, "name", e.target.value)}
-                placeholder="Enter team name"
-                required
-              />
-            </div>
+          <div key={team.id} className="flex items-center space-x-3">
+            <span
+              className={cn("text-2xl rounded-full bg-lime-400", team.color)}
+            >
+              {team.emoji}
+            </span>
+            <Input
+              id={`team-${team.id}`}
+              value={team.name}
+              onChange={(e) => updateTeam(team.id, "name", e.target.value)}
+              placeholder="Enter team name"
+              required
+            />
 
             <Button
               type="button"
@@ -124,7 +112,7 @@ export function TeamSetup({ onSubmit }: { onSubmit: (teams: Team[]) => void }) {
               onClick={() => removeTeam(team.id)}
               disabled={teams.length <= 2}
             >
-              <Trash2Icon className="h-5 w-5" />
+              <X className="h-5 w-5 text-red-500" />
             </Button>
           </div>
         ))}

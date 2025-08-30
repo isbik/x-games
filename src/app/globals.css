@@ -80,3 +80,12 @@ body {
   background-attachment: fixed;
   @apply flex flex-col min-h-dvh;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

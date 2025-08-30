@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Plus, Share } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -72,13 +73,13 @@ function InstallButton() {
     }
   };
 
-  if (isStandalone || !canInstall) {
-    return <div className="grow"></div>;
-  }
-
   return (
-    <>
-      <div className="flex items-center flex-col mx-auto mb-8 mt-4 text-center  bg-white rounded-lg p-4 border-blue-100 border-2  w-fit">
+    <div
+      className={cn(
+        isStandalone || (!canInstall && "opacity-0 pointer-events-none")
+      )}
+    >
+      <div className="flex items-center flex-col mx-auto mb-8 mt-4 text-center  bg-white rounded-lg p-4 border-blue-100 border-2 w-fit">
         <p className="text-sm mb-4 max-w-xs">
           {isIOS
             ? "Добавьте приложение на главный экран для лучшего опыта."
@@ -106,7 +107,7 @@ function InstallButton() {
         )}
       </div>
       <div className="grow"></div>
-    </>
+    </div>
   );
 }
 
