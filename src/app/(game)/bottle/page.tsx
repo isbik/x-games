@@ -364,11 +364,7 @@ export default function BottleGame() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen p-8">
-        <h1 className="text-4xl font-extrabold mb-6 text-gray-800 flex items-center justify-center gap-2">
-          🍾 Бутылочка
-        </h1>
-
+      <div className="flex flex-col grow p-8">
         <div className="mb-24">
           <div className="flex flex-wrap justify-center gap-2">
             {bottles.map((bottle, index) => (

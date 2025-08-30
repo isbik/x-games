@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import { GameSettings } from "@/app/alias/page";
+import { GameSettings } from "@/app/(game)/alias/page";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Switch } from "../../../components/ui/switch";
+import { Switch } from "../../../../components/ui/switch";
 
 export function RoundReview({
   words,
@@ -36,7 +36,7 @@ export function RoundReview({
   };
 
   return (
-    <div className="flex flex-col gap-4 py-4 max-h-dvh">
+    <div className="flex flex-col gap-4 py-4 grow">
       <div className="flex items-center">
         <h1 className="mr-auto">Проверка очков</h1>
         <span className="font-bold bg-blue-100 rounded px-1 ml-1 text-blue-600 border-blue-400 border">

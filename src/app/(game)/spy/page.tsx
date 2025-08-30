@@ -3,7 +3,8 @@
 import { CardGame } from "@/components/card-game";
 import { Button } from "@/components/ui/button";
 import { cn, shuffle } from "@/lib/utils";
-import { ANIMALS, LOCATIONS } from "@/shared/constants";
+import { ANIMALS } from "@/shared/constants/animals";
+import { LOCATIONS } from "@/shared/constants/locations";
 import { useEndTimer } from "@/shared/hooks/use-end-timer";
 import {
   Eye,
@@ -116,10 +117,8 @@ function App() {
   };
 
   return (
-    <div className="overflow-auto max-h-dvh">
-      <CardGame className="gap-4 m-4 rounded-xl pt-6">
-        <h1 className="text-4xl font-bold text-center text-blue-600">Шпион</h1>
-
+    <div className="overflow-auto ">
+      <CardGame className="gap-4 m-4 max-w-md mx-auto w-full rounded-xl pt-6">
         {!gameStarted ? (
           <>
             <div className="bg-blue-100 rounded-xl p-4 space-y-4">

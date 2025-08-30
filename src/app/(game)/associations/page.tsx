@@ -1,12 +1,15 @@
 "use client";
 
 import { CardGame } from "@/components/card-game";
-import { Brain } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Eye } from "lucide-react";
 import React, { useState } from "react";
 
 interface WordEntry {
   word: string;
   timestamp: number;
+  isHidden?: boolean;
 }
 
 function App() {
@@ -33,6 +36,7 @@ function App() {
     const newEntry = {
       word: currentWord,
       timestamp: Date.now(),
+      isHidden: true,
     };
 
     setWords((prev) => [...prev, newEntry]);
@@ -48,20 +52,14 @@ function App() {
   };
 
   return (
-    <CardGame className="gap-4 m-4 rounded-xl">
-      <div className="flex items-center justify-center space-x-2">
-        <Brain className="w-8 h-8 text-blue-500" />
-        <h1 className="text-2xl font-bold text-blue-600">Ассоциация</h1>
-      </div>
-
+    <CardGame className="gap-4 m-4 rounded-xl max-w-md mx-auto w-full">
       {!gameOver ? (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <input
+            <Input
               type="text"
               value={currentWord}
               onChange={(e) => setCurrentWord(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 focus:outline-none transition-colors"
               placeholder={
                 firstPlayerMode ? "Напишите слово..." : "Напишите ассоциацию..."
               }
@@ -98,7 +96,7 @@ function App() {
           <li>
             Придумывает ассоциацию к этому слову (например: &quot;ночь&quot;).
           </li>
-          <li>Пишет только ассоциацию и отправляет слово следующему игроку.</li>
+          <li>Пишет придуманное слово и отправляет слово следующему игроку.</li>
         </ol>
       )}
 
@@ -114,17 +112,25 @@ function App() {
             }}
           >
             {words.map((entry, index) => {
-              const isHidden = words.length < 2;
-
               return (
                 <div
                   key={entry.timestamp}
                   className="flex items-center space-x-2"
                 >
                   <span className="text-blue-500 font-bold">{index + 1}.</span>
-                  <span className="text-gray-800">
-                    {isHidden ? "*".repeat(entry.word.length) : entry.word}
+                  <span className="text-gray-800 grow break-words">
+                    {entry.isHidden
+                      ? "*".repeat(entry.word.length)
+                      : entry.word}
                   </span>
+
+                  <Button
+                    variant={"ghost"}
+                    className="px-2 border-none text-blue-500"
+                    onClick={() => {}}
+                  >
+                    <Eye className="size-4" />
+                  </Button>
                 </div>
               );
             })}

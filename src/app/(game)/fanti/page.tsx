@@ -60,14 +60,10 @@ function App() {
 
   return (
     <div className="flex flex-col grow">
-      <CardGame className="m-4 rounded-xl">
-        <h1 className="text-3xl font-bold text-center text-blue-600 mb-4">
-          Фанты
-        </h1>
-
+      <CardGame className="m-4 rounded-xl max-w-md w-full mx-auto">
         {!gameStarted ? (
           <>
-            <div className="mb-4 flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <div className="flex gap-2">
                 <Input
                   type="text"
@@ -75,7 +71,6 @@ function App() {
                   onChange={(e) => setNewTask(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addTask()}
                   placeholder="Введите задание..."
-                  className="flex-1 p-3 px-4 border focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Button
                   onClick={addTask}
@@ -95,27 +90,29 @@ function App() {
                 <p>Показывать задания</p>
               </label>
 
-              <div className="space-y-2 mb-4">
-                {tasks.map((task) => (
-                  <motion.div
-                    key={task.id}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
-                  >
-                    <span className="truncate">
-                      {showTasks ? task.text : "*".repeat(task.text.length)}
-                    </span>
-                    <button
-                      onClick={() => removeTask(task.id)}
-                      className="text-red-500 hover:text-red-600"
+              {tasks.length !== 0 && (
+                <div className="space-y-2 mb-4">
+                  {tasks.map((task) => (
+                    <motion.div
+                      key={task.id}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
                     >
-                      <FaTrash />
-                    </button>
-                  </motion.div>
-                ))}
-              </div>
+                      <span className="truncate">
+                        {showTasks ? task.text : "*".repeat(task.text.length)}
+                      </span>
+                      <button
+                        onClick={() => removeTask(task.id)}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <FaTrash />
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
 
               {tasks.length > 1 && (
                 <button
@@ -136,7 +133,7 @@ function App() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="mb-6 p-4 bg-blue-100 rounded-lg mt-2"
+                  className="mb-4 p-4 bg-blue-100 rounded-lg mt-2"
                 >
                   <h2 className="text-xl font-semibold mb-2">Ваше задание:</h2>
                   <p className="text-2xl text-blue-600 break-all">
@@ -147,7 +144,7 @@ function App() {
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="mb-6 text-gray-600"
+                  className="mb-4 text-gray-600"
                 >
                   Нажмите кнопку, чтобы получить задание
                 </motion.p>
@@ -155,26 +152,24 @@ function App() {
             </AnimatePresence>
 
             <div className="space-y-3">
-              <button
-                onClick={drawTask}
-                className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
-              >
+              <Button onClick={drawTask} className="w-full py-6">
                 <FaRandom />
                 {remainingTasks.length === 0
                   ? "Начать новый круг"
                   : "Вытянуть фант"}
-              </button>
+              </Button>
 
-              <button
+              <Button
+                className="w-full py-6"
+                variant={"outline"}
                 onClick={resetGame}
-                className="w-full bg-gray-500 text-white p-3 rounded-lg hover:bg-gray-600 transition-colors flex items-center justify-center gap-2"
               >
                 <FaRedo />
                 Вернуться к редактированию
-              </button>
+              </Button>
             </div>
 
-            <p className="mt-4 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-gray-500">
               Осталось заданий: {remainingTasks.length}
             </p>
           </div>

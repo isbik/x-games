@@ -14,10 +14,10 @@ export const Select = ({ label, value, items, onChangeValue }: Props) => {
 
   return (
     <div className="relative">
-      <h3 className="text-lg font-bold text-blue-800 mb-3">{label}</h3>
+      <h3 className="text-lg font-bold text-blue-500 mb-1">{label}</h3>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-blue-100 hover:bg-blue-200 text-blue-900 px-4 py-3 rounded-xl font-medium transition-colors flex items-center justify-between"
+        className="w-full  px-4 py-3 rounded-xl font-medium transition-colors flex items-center justify-between border"
       >
         <span>{value}</span>
         {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
@@ -29,7 +29,7 @@ export const Select = ({ label, value, items, onChangeValue }: Props) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 right-0 mt-1 bg-white border border-blue-200 rounded-xl shadow-lg z-10 overflow-hidden"
+            className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-xl shadow-lg z-10 overflow-hidden"
           >
             {items.map((item) => (
               <button
@@ -40,7 +40,7 @@ export const Select = ({ label, value, items, onChangeValue }: Props) => {
                 }}
                 className={`flex items-center justify-between w-full text-left px-4 py-3 hover:bg-blue-100 truncate transition-colors ${
                   value === item
-                    ? "bg-blue-100 text-blue-800 font-medium"
+                    ? "bg-blue-100 text-blue-500 font-medium"
                     : "text-gray-800"
                 }`}
               >

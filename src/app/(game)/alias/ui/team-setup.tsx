@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import type { Team } from "@/app/alias/page";
+import type { Team } from "@/app/(game)/alias/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";

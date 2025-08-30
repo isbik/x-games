@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, EyeOff, Play, RefreshCw } from "lucide-react";
@@ -11,7 +12,6 @@ function App() {
   const [isWordVisible, setIsWordVisible] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [selectedPack, setSelectedPack] = useState(Object.keys(packs)[0]);
-  const [isPackSelectOpen, setIsPackSelectOpen] = useState(false);
   const [prev, setPrev] = useState<string[]>([]);
 
   const getRandomWord = () => {
@@ -19,7 +19,7 @@ function App() {
     const randomIndex = Math.floor(Math.random() * words.length);
     const newWord = words[randomIndex];
 
-    if (prev.includes(newWord) && prev.length === words.length) {
+    if (prev.includes(newWord) && prev.length !== words.length) {
       getRandomWord();
       return;
     }
@@ -32,7 +32,6 @@ function App() {
 
   const handlePackSelect = (pack: string) => {
     setSelectedPack(pack);
-    setIsPackSelectOpen(false);
   };
 
   const startGame = () => {
@@ -45,22 +44,19 @@ function App() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-dvh flex flex-col px-4 sm:px-8 pt-4 sm:pt-8"
+      className="grow flex flex-col p-4 pb-0"
     >
       <div className="max-w-lg w-full mx-auto flex flex-col gap-2 grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-green-700 rounded-2xl p-5 border"
+          className="bg-white rounded-2xl p-5 border"
         >
-          <h1 className="text-4xl font-bold mb-2 text-white text-center">
-            Крокодил 🐊
-          </h1>
-          <p className="text-center text-white/90 mb-4">
+          <p className="text-center text-xl  mb-4">
             Покажи слово, пусть другие угадают!
           </p>
-          <h3 className="text-lg font-bold text-white mb-3">Как играть:</h3>
-          <ol className="space-y-2 text-white/90 list-decimal list-inside text-sm">
+          <h3 className="text-lg font-bold mb-1 text-blue-500">Как играть:</h3>
+          <ol className="space-y-2 list-decimal list-inside text-sm">
             <li>
               Выберите набор слов и нажмите {`"`}Начать Игру{`"`}
             </li>
@@ -81,7 +77,7 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-white rounded-2xl p-5 border border-blue-200 shadow-lg"
+              className="bg-white rounded-2xl p-5 border  shadow-lg"
             >
               <Select
                 value={selectedPack}
@@ -100,7 +96,7 @@ function App() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="bg-green-700 rounded-t-3xl p-6"
+          className="bg-blue-700 rounded-t-3xl p-6"
         >
           <AnimatePresence mode="wait">
             {!isGameStarted ? (
@@ -110,16 +106,14 @@ function App() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
               >
-                <motion.button
+                <Button
                   onClick={startGame}
                   disabled={!selectedPack}
-                  className="w-full bg-white/20 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-4 rounded-2xl text-xl font-medium transition-colors flex items-center justify-center gap-2"
-                  whileHover={{ scale: selectedPack ? 1.02 : 1 }}
-                  whileTap={{ scale: selectedPack ? 0.98 : 1 }}
+                  className="w-full py-6 text-lg font-bold"
                 >
-                  <Play size={24} />
+                  <Play className="size-4" />
                   Начать Игру
-                </motion.button>
+                </Button>
               </motion.div>
             ) : (
               <>

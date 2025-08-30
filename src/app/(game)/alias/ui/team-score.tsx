@@ -1,6 +1,6 @@
 "use client";
 
-import type { GameSettings, Team } from "@/app/alias/page";
+import type { GameSettings, Team } from "@/app/(game)/alias/page";
 import { Button } from "@/components/ui/button";
 import { Trophy } from "lucide-react";
 

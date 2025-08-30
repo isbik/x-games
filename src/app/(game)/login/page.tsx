@@ -110,7 +110,7 @@ const LoginMenu = () => {
 
 const LoginPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 font-sans">
+    <div className="grow flex items-center justify-center p-4 md:p-8 font-sans">
       <div className="w-full max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl bg-white flex flex-col md:flex-row">
         <div className="flex-none w-full md:w-1/3 p-8 md:p-12 text-white bg-gradient-to-b from-indigo-600 to-blue-700 flex flex-col justify-between items-start rounded-3xl md:rounded-r-none">
           <LoginMenu />

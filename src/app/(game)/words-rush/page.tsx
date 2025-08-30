@@ -104,12 +104,9 @@ const App: React.FC = () => {
 
   if (gameState === "setup") {
     return (
-      <div className="min-h-screen p-4">
+      <div className="grow p-4">
         <div className="max-w-md mx-auto">
           <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-            <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
-              👤 Введите имена игроков
-            </h1>
             <div className="space-y-4 mb-6">
               {players.map((player, index) => (
                 <div key={player.id} className="flex items-center space-x-3">
@@ -192,8 +189,7 @@ const App: React.FC = () => {
 
   const Header = () => {
     return (
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">🎯 Игра</h1>
+      <div className="flex justify-end items-center mb-6">
         <button
           onClick={resetGame}
           className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
@@ -206,10 +202,10 @@ const App: React.FC = () => {
 
   if (gameState === "round" && currentRound) {
     return (
-      <div className="min-h-screen p-4">
+      <div className="grow p-4">
         <div className="max-w-md mx-auto">
-          <Header />
           <div className="bg-white rounded-2xl shadow-lg p-4 mb-6">
+            <Header />
             <div className="space-y-3 mb-6">
               {players.map((player, index) => (
                 <button
@@ -281,11 +277,10 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen p-4">
+    <div className="grow p-4">
       <div className="max-w-md mx-auto">
-        <Header />
-
         <div className="bg-white rounded-2xl shadow-lg p-4 mb-6">
+          <Header />
           <div className="space-y-3 mb-6">
             {players.map((player, index) => (
               <div

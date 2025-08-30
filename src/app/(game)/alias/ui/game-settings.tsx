@@ -4,11 +4,11 @@ import type React from "react";
 
 import { useState } from "react";
 
-import type { GameSettings } from "@/app/alias/page";
+import type { GameSettings } from "@/app/(game)/alias/page";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useSessionStorage } from "@/shared/hooks/use-session-storage";
-import { Switch } from "../../../components/ui/switch";
+import { Switch } from "../../../../components/ui/switch";
 
 export function GameSettings({
   onSubmit,
@@ -71,7 +71,7 @@ export function GameSettings({
             ))}
           </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 py-2">
           <Label htmlFor="subtractPoints">Отнимать очки за ошибки</Label>
           <Switch
             id="subtractPoints"

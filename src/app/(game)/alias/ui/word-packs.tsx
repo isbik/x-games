@@ -41,7 +41,7 @@ export function WordPacks({
 
       <div className="bg-gray-500/20 h-[1px] -mx-4"></div>
 
-      <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 -m-4 p-4 mb-auto">
+      <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 -m-4 p-4 mb-auto">
         {packs.map((pack) => (
           <button
             key={pack.name}

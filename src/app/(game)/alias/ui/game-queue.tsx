@@ -1,6 +1,6 @@
 "use client";
 
-import type { GameSettings, Team } from "@/app/alias/page";
+import type { GameSettings, Team } from "@/app/(game)/alias/page";
 import { Button } from "@/components/ui/button";
 import { cn, shuffle } from "@/lib/utils";
 import { useEndTimer } from "@/shared/hooks/use-end-timer";
@@ -105,7 +105,7 @@ export function GameQueue({
   };
 
   return (
-    <>
+    <div className="overflow-hidden flex flex-col grow">
       <div className="flex gap-2 py-4">
         <div className="flex items-center gap-3 mr-auto">
           <span
@@ -193,6 +193,6 @@ export function GameQueue({
           <PlayIcon className="h-6 w-6" /> Начать раунд
         </Button>
       )}
-    </>
+    </div>
   );
 }

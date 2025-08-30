@@ -1,11 +1,11 @@
 "use client";
 
-import { GameQueue } from "@/app/alias/ui/game-queue";
-import { GameSettings } from "@/app/alias/ui/game-settings";
-import { RoundReview } from "@/app/alias/ui/round-review";
-import { TeamScore } from "@/app/alias/ui/team-score";
-import { TeamSetup } from "@/app/alias/ui/team-setup";
-import { WordPacks } from "@/app/alias/ui/word-packs";
+import { GameQueue } from "@/app/(game)/alias/ui/game-queue";
+import { GameSettings } from "@/app/(game)/alias/ui/game-settings";
+import { RoundReview } from "@/app/(game)/alias/ui/round-review";
+import { TeamScore } from "@/app/(game)/alias/ui/team-score";
+import { TeamSetup } from "@/app/(game)/alias/ui/team-setup";
+import { WordPacks } from "@/app/(game)/alias/ui/word-packs";
 import { CardGame } from "@/components/card-game";
 import { useState } from "react";
 
@@ -96,7 +96,7 @@ export default function Game() {
 
   return (
     <div className="flex flex-col grow">
-      <CardGame className="py-0 flex flex-col grow m-4">
+      <CardGame className="py-0 flex flex-col grow m-4 max-w-md mx-auto w-full">
         {step === "setup" && <TeamSetup onSubmit={handleTeamsSubmit} />}
         {step === "packs" && <WordPacks onSubmit={handlePacksSelect} />}
         {step === "settings" && (
