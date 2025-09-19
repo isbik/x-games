@@ -1,8 +1,7 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { ClassNameValue, twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+export function cn(...inputs: ClassNameValue[]) {
+  return twMerge(inputs.filter(Boolean).join(" "));
 }
 
 export const shuffle = <T>(arr: T[]) => {

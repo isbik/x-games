@@ -76,7 +76,7 @@ function InstallButton() {
   return (
     <div
       className={cn(
-        isStandalone || (!canInstall && "opacity-0 pointer-events-none")
+        isStandalone ? !canInstall && "opacity-0 pointer-events-none" : ""
       )}
     >
       <div className="flex items-center flex-col mx-auto mb-8 mt-4 text-center  bg-white rounded-lg p-4 border-blue-100 border-2 w-fit">
