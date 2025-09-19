@@ -4,12 +4,13 @@ import { Footer } from "@/components/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GAMES } from "@/shared/constants/games";
 import { InstallButton } from "@/widgets/install-button";
+import { SiteHeader } from "@/widgets/site-header";
 import Link from "next/link";
 
 export default function Games() {
   return (
     <>
-      {/* <Header /> */}
+      <SiteHeader />
 
       <div className="max-w-7xl mx-auto flex flex-col grow gap-4 p-4">
         <div className="text-center relative sm:py-8">

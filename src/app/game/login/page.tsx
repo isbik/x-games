@@ -91,7 +91,7 @@ const LoginMenu = () => {
       <div className="flex flex-col items-start space-y-4 mb-auto">
         <Link href="/" className="flex items-center space-x-2 text-white">
           <Dice3 size={48} className="text-white" />
-          <h1 className="text-4xl font-bold">BoardTime</h1>
+          <h1 className="text-4xl font-bold">funtok</h1>
         </Link>
         <p className="text-blue-100 mt-2 text-lg max-w-sm">
           Мир игр у вас под рукой.
@@ -102,7 +102,7 @@ const LoginMenu = () => {
 
       <div className="mt-4 text-blue-200 text-xs flex items-center">
         <Copyright size={14} className="mr-1" />
-        <p>{new Date().getFullYear()} BoardTime. Все права защищены.</p>
+        <p>{new Date().getFullYear()} funtok. Все права защищены.</p>
       </div>
     </div>
   );

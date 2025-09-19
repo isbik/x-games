@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BoardTime - игры для всех",
+  title: "funtok - игры для всех",
   description:
     "Игры на доске для всех возрастов: от головоломок и логики до забавных задач и викторин. Играй на своем устройстве: на компьютере, смартфоне или планшете",
+  icons: {
+    icon: "favicon.svg",
+  },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
